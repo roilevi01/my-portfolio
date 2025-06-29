@@ -1,59 +1,78 @@
-# Portfolio
+# 🧑‍💻 Roi Levi – Developer Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+Welcome to my **personal portfolio website**, showcasing my skills, projects, and experience as a Full Stack Developer.
 
-## Development server
+This site was built with **Angular 17**, SCSS, animations, and a strong focus on clean UI/UX and responsive design.
 
-To start a local development server, run:
+---
+
+## 🔗 Live Demo
+
+👉 [View my portfolio on GitHub Pages](https://roilevi01.github.io/my-portfolio)
+
+---
+
+## 🛠 Tech Stack
+
+- ⚙️ **Framework:** Angular 17
+- 🎨 **Styling:** SCSS with variables, animations, and responsive design
+- 🧠 **Skills:** JavaScript, HTML5, CSS3, TypeScript, API Integration, Routing
+- 📩 **Extras:** Smooth scroll service, animated titles, and CV download
+
+---
+
+## 📂 Folder Structure
+
+├── src/
+│ ├── app/
+│ │ ├── pages/
+│ │ ├── components/
+│ │ └── services/
+│ ├── assets/
+│ └── styles/
+├── docs/ <-- GitHub Pages build output
+└── README.md
+
+yaml
+Copy
+Edit
+
+---
+
+## ⚙️ Development
+
+To start the development server:
 
 ```bash
 ng serve
+Then go to: http://localhost:4200
+
+🏗 Build for Production
+To build and prepare for GitHub Pages:
+
+bash
+Copy
+Edit
+ng build --output-path docs --base-href /my-portfolio/
+Make sure angular.json has "outputPath": "docs" under "options".
+
+📄 Download CV
+The site includes a button to download my CV:
+
+📄 assets/ROILEVI_20.3.pdf
+
+📫 Contact
+Use the contact form on the site or reach me via:
+
+Email: roilevi2212@gmail.com
+
+GitHub: RoiLevi01
+
+LinkedIn: Roi Levi
+
+🎯 Goal
+This portfolio is a central place to showcase my work, connect with recruiters, and demonstrate my capabilities through real, working web applications.
+
+🤝 License
+This project is open for review and feedback. Feel free to reach out
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
