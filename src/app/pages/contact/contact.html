@@ -1,0 +1,24 @@
+<section id="contact" class="contact-section">
+  <h2 class="section-title">Contact Me</h2>
+  <p>Have a question or want to work together? Leave a message!</p>
+
+  <form (submit)="onSubmit($event)" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea
+      name="message"
+      rows="5"
+      placeholder="Your Message"
+      required
+    ></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <app-custom-snackbar
+    *ngIf="showSnackbar()"
+    [type]="snackBarType()"
+    [message]="snackBarType() === 'success' ? 'Message sent successfully!' : 'Failed to send message. Try again.'"
+    (dismissed)="onDismissed()"
+  />
+</section>

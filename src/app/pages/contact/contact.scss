@@ -1,0 +1,94 @@
+@use "../../../styles/variables" as *;
+
+.contact-section {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: $background-dark;
+  color: $text-light;
+  font-family: $heading-font;
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: $text-light;
+  }
+
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    input,
+    textarea {
+      padding: 0.75rem;
+      border: 1px solid $primary-color;
+      border-radius: 8px;
+      background-color: transparent;
+      color: $text-light;
+      font-family: $main-font;
+    }
+
+    button {
+      padding: 0.75rem;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: $heading-font;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}
+
+@keyframes fadeInMagic {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-10deg);
+    filter: brightness(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+}
+
+@keyframes fadeOutFire {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg);
+    box-shadow: 0 0 10px 2px orange;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(10deg);
+    filter: hue-rotate(80deg);
+    box-shadow: 0 0 30px 10px red;
+  }
+}
+
+::ng-deep .mat-mdc-snack-bar-container.success-snackbar,
+::ng-deep .mat-mdc-snack-bar-container.error-snackbar {
+  animation: fadeInMagic 0.4s ease-out forwards;
+  font-weight: bold;
+  text-align: center;
+  background-color: #1f1f1f;
+  color: white;
+  border-radius: 8px;
+}
+
+::ng-deep .mat-mdc-snack-bar-container.snackbar-hide {
+  animation: fadeOutFire 0.7s ease-in forwards;
+}

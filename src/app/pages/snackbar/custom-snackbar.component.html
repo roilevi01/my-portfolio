@@ -1,0 +1,10 @@
+<div
+  class="snackbar"
+  [ngClass]="{
+    'fade-out': isExiting,
+    success: type === 'success',
+    error: type === 'error'
+  }"
+>
+  <span>{{ message }}</span>
+</div>

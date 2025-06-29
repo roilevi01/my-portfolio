@@ -1,0 +1,86 @@
+@use "../../../../../styles//variables" as *;
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero {
+  animation: fadeInUp 1.2s ease-out;
+  text-align: center;
+  background-color: #0f172a;
+  color: $text-light;
+  padding: 80px 20px;
+
+  h1 {
+    font-size: 3rem;
+    font-family: $main-font;
+    margin-bottom: 1rem;
+    font-family: $heading-font;
+
+    span {
+      background: linear-gradient(270deg, #00c6ff, #0072ff, #00c6ff);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 6s ease infinite;
+      display: inline-block;
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: lighten($text-light, 10%);
+  }
+
+  .download-btn {
+    margin-top: 30px;
+    background-color: $primary-color;
+    padding: 12px 24px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: $main-font;
+    display: inline-block;
+    transition: background-color 0.3s;
+    font-family: $heading-font;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    .download-btn {
+      padding: 10px 20px;
+    }
+  }
+}

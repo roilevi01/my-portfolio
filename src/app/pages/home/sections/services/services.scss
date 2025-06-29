@@ -1,0 +1,46 @@
+@import "../../../../../styles/variables";
+
+.services {
+  background-color: #0f172a;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .service-card {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    border: 1px solid $primary-color;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
+    transition: transform 0.3s;
+
+    h3 {
+      font-size: 1.3rem;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+    p,
+    h3 {
+      font-family: $heading-font;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
