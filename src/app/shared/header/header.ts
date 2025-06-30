@@ -8,10 +8,16 @@ import { ScrollService } from '../../services/scroll.service';
   styleUrls: ['./header.scss'],
 })
 export class Header {
+  menuOpen = false;
   private scroll = inject(ScrollService);
 
-  scrollTo(sectionId: string, event: Event) {
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  scrollTo(sectionId: string, event: Event): void {
     event.preventDefault();
     this.scroll.scrollToElementSlowly(sectionId);
+    this.menuOpen = false;
   }
 }

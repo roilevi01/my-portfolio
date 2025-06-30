@@ -5,7 +5,12 @@
       alt="logo-myself"
     />
   </div>
-  <nav class="nav-links">
+
+  <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle Menu">
+    {{ menuOpen ? '✖' : '☰' }}
+  </button>
+
+  <nav class="nav-links" [class.open]="menuOpen">
     <a (click)="scrollTo('resume', $event)">Resume</a>
     <a (click)="scrollTo('projects', $event)">Projects</a>
     <a (click)="scrollTo('services', $event)">Services</a>
