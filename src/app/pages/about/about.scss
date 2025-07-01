@@ -1,5 +1,6 @@
 @use "../../../styles/variables" as *;
 
+// סיבוב בקרוסלה בעת ריחוף
 @keyframes carouselFlip {
   0% {
     transform: rotateY(0deg);
@@ -9,6 +10,7 @@
   }
 }
 
+// הופעה רכה לטקסט
 @keyframes fadeInSmooth {
   0% {
     opacity: 0;
@@ -18,6 +20,33 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+// קפיצה טבעית מה-footer כמו כדור
+@keyframes realisticBounceUp {
+  0% {
+    transform: translateY(100vh);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(15px);
+  }
+  75% {
+    transform: translateY(-8px);
+  }
+  90% {
+    transform: translateY(4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.from-footer-bounce {
+  animation: realisticBounceUp 2s ease-out 0.5s forwards;
+  will-change: transform;
 }
 
 .about {
@@ -41,6 +70,11 @@
     display: block;
     image-rendering: auto;
 
+    // הפעלת הקפיצה ברירת מחדל
+    &.from-footer-bounce {
+      animation: realisticBounceUp 2s ease-out 0.5s forwards;
+    }
+
     &:hover {
       animation: carouselFlip 1.2s ease-in-out;
     }
@@ -49,6 +83,8 @@
   .text {
     max-width: 500px;
     animation: fadeInSmooth 1.2s ease forwards;
+    animation-delay: 2.2s;
+    opacity: 0;
 
     h2 {
       font-size: 2.5rem;
