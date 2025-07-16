@@ -1,22 +1,18 @@
-# שלב 1: בנייה עם Node
-FROM node:20 AS builder
+# שלב 1: בניית אפליקציית Angular
+FROM node:18 AS build
 
 WORKDIR /app
 COPY . .
+RUN npm install
+RUN npm run build -- --configuration production --project=portfolio
 
-# בניית אפליקציית Angular
-RUN npm install && npm run build --configuration production
-
-# שלב 2: הפצה עם Nginx
+# שלב 2: שרת NGINX
 FROM nginx:alpine
 
-# הסר את דף ברירת המחדל של nginx
-RUN rm -rf /usr/share/nginx/html/*
+# העתק את ה־dist שנבנה אל תיקיית ברירת המחדל של nginx
+COPY --from=build /app/dist/portfolio /usr/share/nginx/html
 
-# העתק את קבצי הבנייה
-COPY --from=builder /app/dist/portfolio /usr/share/nginx/html
-
-# (רשות) אם יש לך nginx.conf, העתק אותו:
+# נוכל להוסיף קובץ nginx.conf כאן אם צריך (לנתיבים)
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
