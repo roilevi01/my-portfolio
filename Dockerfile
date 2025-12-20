@@ -1,23 +1,22 @@
-# שלב 1: בניית אפליקציית Angular
+# Stage 1: Build Angular app
 FROM node:20 AS build
-
 WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
 COPY . .
-RUN npm install
 RUN npm run build -- --configuration production --project=portfolio
 
-# שלב 2: NGINX לאחסון האתר
+# Stage 2: Serve with Nginx
 FROM nginx:alpine
 
-# מחק קבצים ישנים מתיקיית ברירת המחדל
 RUN rm -rf /usr/share/nginx/html/*
 
-# העתק את התוכן הבנוי מהשלב הקודם
-COPY --from=build /app/dist/portfolio /usr/share/nginx/html
+# ✅ חשוב: שים לב ל- /browser
+COPY --from=build /app/dist/portfolio/browser /usr/share/nginx/html
 
-# העתק את קובץ הקונפיג החדש
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# פתיחת פורט
-EXPOSE 80
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
