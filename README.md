@@ -8,7 +8,8 @@ This site was built with **Angular 17**, SCSS, animations, and a strong focus on
 
 ## 🔗 Live Demo
 
-👉 [View my portfolio on GitHub Pages](https://roilevi01.github.io/my-portfolio)
+🌐 Live Portfolio: https://portfolio-solitary-rain-2986.fly.dev/
+
 
 ---
 
