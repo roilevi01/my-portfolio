@@ -1,4 +1,4 @@
-// Enhanced animation keyframes
+// Enhanced animation keyframes with improved easing
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -104,11 +104,46 @@
   }
 }
 
-// Utility classes for scroll animations
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes rotate-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// Utility classes for scroll animations with performance optimizations
 .fade-in-up {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 
   &.visible {
     opacity: 1;
@@ -119,7 +154,9 @@
 .fade-in-down {
   opacity: 0;
   transform: translateY(-40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 
   &.visible {
     opacity: 1;
@@ -130,7 +167,9 @@
 .fade-in-left {
   opacity: 0;
   transform: translateX(-80px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 
   &.visible {
     opacity: 1;
@@ -141,7 +180,9 @@
 .fade-in-right {
   opacity: 0;
   transform: translateX(80px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 
   &.visible {
     opacity: 1;
@@ -152,7 +193,9 @@
 .scale-in {
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 
   &.visible {
     opacity: 1;

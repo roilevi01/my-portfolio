@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { ScrollService } from '../../services/scroll.service';
 
 @Component({
@@ -7,9 +7,25 @@ import { ScrollService } from '../../services/scroll.service';
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],
 })
-export class Header {
+export class Header implements OnInit, OnDestroy {
   menuOpen = false;
+  isScrolled = false;
   private scroll = inject(ScrollService);
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const scrollY = window.scrollY || window.pageYOffset;
+    this.isScrolled = scrollY > 50;
+  }
+
+  ngOnInit(): void {
+    // Initial check
+    this.onWindowScroll();
+  }
+
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;

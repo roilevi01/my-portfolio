@@ -1,4 +1,4 @@
-import { Component, signal, AfterViewInit, inject } from '@angular/core';
+import { Component, signal, AfterViewInit, inject, ElementRef, ViewChild } from '@angular/core';
 import emailjs from 'emailjs-com';
 import { CustomSnackbarComponent } from '../snackbar/custom-snackbar.component';
 import { CommonModule } from '@angular/common';
@@ -16,12 +16,16 @@ export class Contact implements AfterViewInit {
   showSnackbar = signal(false);
   private intersectionObserver = inject(IntersectionObserverService);
 
+  @ViewChild('contactForm', { static: false }) contactForm?: ElementRef<HTMLFormElement>;
+
   ngAfterViewInit(): void {
-    const form = document.querySelector('.contact-form');
-    if (form) {
-      this.intersectionObserver.observeElement(form, (entry: IntersectionObserverEntry) => {
-        entry.target.classList.add('visible');
-      });
+    if (this.contactForm?.nativeElement) {
+      this.intersectionObserver.observeElement(
+        this.contactForm.nativeElement,
+        (entry: IntersectionObserverEntry) => {
+          entry.target.classList.add('visible');
+        }
+      );
     }
   }
 

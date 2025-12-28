@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, inject } from '@angular/core';
+import { Component, AfterViewInit, inject, ElementRef, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { IntersectionObserverService } from '../../services/intersection-observer.service';
 
 @Component({
@@ -10,9 +10,11 @@ import { IntersectionObserverService } from '../../services/intersection-observe
 export class Projects implements AfterViewInit {
   private intersectionObserver = inject(IntersectionObserverService);
 
+  @ViewChildren('projectCard') projectCards?: QueryList<ElementRef<HTMLElement>>;
+
   ngAfterViewInit(): void {
-    const cards = document.querySelectorAll('.project-card');
-    if (cards.length > 0) {
+    if (this.projectCards && this.projectCards.length > 0) {
+      const cards = this.projectCards.map(card => card.nativeElement);
       this.intersectionObserver.observeMultipleElements(
         cards,
         (entry: IntersectionObserverEntry) => {

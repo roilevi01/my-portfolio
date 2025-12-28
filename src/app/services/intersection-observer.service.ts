@@ -5,32 +5,38 @@ import { Injectable } from '@angular/core';
 })
 export class IntersectionObserverService {
   private observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.15,
+    rootMargin: '0px 0px -100px 0px',
   };
 
   createObserver(
-    callback: (entry: IntersectionObserverEntry) => void
+    callback: (entry: IntersectionObserverEntry) => void,
+    options?: IntersectionObserverInit
   ): IntersectionObserver {
+    const finalOptions = { ...this.observerOptions, ...options };
     return new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          callback(entry);
+          // Use requestAnimationFrame for smoother animations
+          requestAnimationFrame(() => {
+            callback(entry);
+          });
         }
       });
-    }, this.observerOptions);
+    }, finalOptions);
   }
 
   observeElement(
     element: Element | null,
-    callback: (entry: IntersectionObserverEntry) => void
+    callback: (entry: IntersectionObserverEntry) => void,
+    options?: IntersectionObserverInit
   ): IntersectionObserver | null {
     if (!element) return null;
 
     const observer = this.createObserver((entry) => {
       callback(entry);
       observer.unobserve(entry.target);
-    });
+    }, options);
 
     observer.observe(element);
     return observer;
@@ -38,13 +44,14 @@ export class IntersectionObserverService {
 
   observeMultipleElements(
     elements: NodeListOf<Element> | Element[],
-    callback: (entry: IntersectionObserverEntry) => void
+    callback: (entry: IntersectionObserverEntry) => void,
+    options?: IntersectionObserverInit
   ): IntersectionObserver | null {
     if (!elements || elements.length === 0) return null;
 
     const observer = this.createObserver((entry) => {
       callback(entry);
-    });
+    }, options);
 
     elements.forEach((element) => {
       observer.observe(element);

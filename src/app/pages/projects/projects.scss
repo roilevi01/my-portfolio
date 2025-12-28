@@ -50,6 +50,7 @@
     transform: translateY(40px);
     position: relative;
     overflow: hidden;
+    will-change: transform, opacity, box-shadow;
 
     &::before {
       content: "";
@@ -70,6 +71,8 @@
     &.visible {
       opacity: 1;
       transform: translateY(0);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     &:nth-child(1).visible {
@@ -149,8 +152,9 @@
 
     &:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(52, 152, 219, 0.3);
-      border-color: rgba(52, 152, 219, 0.5);
+      box-shadow: 0 20px 40px rgba(52, 152, 219, 0.4),
+        0 0 60px rgba(52, 152, 219, 0.1);
+      border-color: rgba(52, 152, 219, 0.6);
 
       &::before {
         left: 100%;
@@ -158,6 +162,10 @@
 
       img {
         transform: scale(1.05);
+      }
+
+      h3 {
+        color: lighten($primary-color, 10%);
       }
     }
   }

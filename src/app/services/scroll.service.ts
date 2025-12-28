@@ -4,22 +4,30 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ScrollService {
-  scrollToElementSlowly(id: string) {
+  scrollToElementSlowly(id: string, offset: number = 0): void {
     const target = document.getElementById(id);
-    if (!target) return;
+    if (!target) {
+      console.warn(`Element with id "${id}" not found`);
+      return;
+    }
 
-    const targetY = target.getBoundingClientRect().top + window.scrollY;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - offset;
     const startY = window.scrollY;
     const distance = targetY - startY;
-    const duration = 1500;
+    const duration = 1200;
     const startTime = performance.now();
 
     const step = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      window.scrollTo(0, startY + distance * this.easeInOutCubic(progress));
+      const easeProgress = this.easeInOutCubic(progress);
+      
+      window.scrollTo({
+        top: startY + distance * easeProgress,
+        behavior: 'auto' // We're handling smooth scroll manually
+      });
 
-      if (elapsed < duration) {
+      if (progress < 1) {
         requestAnimationFrame(step);
       }
     };
@@ -28,6 +36,8 @@ export class ScrollService {
   }
 
   private easeInOutCubic(t: number): number {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    return t < 0.5 
+      ? 4 * t * t * t 
+      : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 }
