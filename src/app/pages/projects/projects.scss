@@ -1,38 +1,102 @@
 @use "../../../styles/variables" as *;
 
 .portfolio {
-  background-color: #0f172a;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: white;
-  padding: 60px 20px;
+  padding: 80px 20px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at 80% 20%,
+      rgba(52, 152, 219, 0.1) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
 
   h2 {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
   }
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     padding: 0 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   .project-card {
-    background-color: #1e293b;
-    padding: 20px;
-    border-radius: 12px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    padding: 30px;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    opacity: 0;
+    transform: translateY(40px);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(52, 152, 219, 0.1),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &:nth-child(1).visible {
+      transition-delay: 0.1s;
+    }
+    &:nth-child(2).visible {
+      transition-delay: 0.2s;
+    }
+    &:nth-child(3).visible {
+      transition-delay: 0.3s;
+    }
+    &:nth-child(4).visible {
+      transition-delay: 0.4s;
+    }
 
     img {
       width: 100%;
       border-radius: 8px;
       margin-bottom: 15px;
+      transition: transform 0.4s;
     }
 
     h3 {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: $primary-color;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-weight: 600;
     }
 
     p,
@@ -41,13 +105,74 @@
     }
 
     p {
-      font-size: 0.95rem;
-      color: #ccc;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .tech-stack {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 20px;
+    }
+
+    a {
+      display: inline-block;
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      position: relative;
+      padding-bottom: 4px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: $primary-color;
+        transition: width 0.3s;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+
+      &:hover {
+        color: lighten($primary-color, 10%);
+        transform: translateX(5px);
+      }
     }
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 188, 212, 0.2);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(52, 152, 219, 0.3);
+      border-color: rgba(52, 152, 219, 0.5);
+
+      &::before {
+        left: 100%;
+      }
+
+      img {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 15px;
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 25px;
+      padding: 0;
+    }
+
+    .project-card {
+      padding: 25px;
     }
   }
 }

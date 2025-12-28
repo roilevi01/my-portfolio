@@ -6,7 +6,12 @@
     />
   </div>
 
-  <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle Menu">
+  <button
+    class="hamburger"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="menuOpen"
+    [attr.aria-label]="menuOpen ? 'Close menu' : 'Open menu'"
+  >
     {{ menuOpen ? '✖' : '☰' }}
   </button>
 

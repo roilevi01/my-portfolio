@@ -1,15 +1,4 @@
-@use "../../../../../styles//variables" as *;
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+@use "../../../../../styles/variables" as *;
 
 @keyframes gradientMove {
   0% {
@@ -23,54 +12,173 @@
   }
 }
 
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nameReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes titleSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .hero {
-  animation: fadeInUp 1.2s ease-out;
+  animation: heroFadeIn 1s ease-out;
   text-align: center;
-  background-color: #0f172a;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: $text-light;
-  padding: 80px 20px;
+  padding: 120px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at 20% 50%,
+      rgba(52, 152, 219, 0.1) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
 
   h1 {
-    font-size: 3rem;
-    font-family: $main-font;
-    margin-bottom: 1rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-family: $heading-font;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    position: relative;
+    z-index: 1;
+    animation: titleSlide 1s ease-out 0.3s both;
+
+    br {
+      display: block;
+    }
 
     span {
-      background: linear-gradient(270deg, #00c6ff, #0072ff, #00c6ff);
-      background-size: 400% 400%;
+      background: linear-gradient(
+        135deg,
+        #00c6ff 0%,
+        #0072ff 50%,
+        #00c6ff 100%
+      );
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientMove 6s ease infinite;
+      background-clip: text;
+      animation: gradientMove 4s ease infinite, nameReveal 1s ease-out 0.6s both;
       display: inline-block;
+      font-weight: 700;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 198, 255, 0.5),
+          transparent
+        );
+        animation: gradientMove 4s ease infinite;
+      }
     }
   }
 
   p {
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    color: lighten($text-light, 10%);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    animation: fadeInUp 1s ease-out 0.9s both;
+    position: relative;
+    z-index: 1;
   }
 
   .download-btn {
-    margin-top: 30px;
-    background-color: $primary-color;
-    padding: 12px 24px;
-    border-radius: 10px;
+    margin-top: 40px;
+    background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
+    padding: 16px 32px;
+    border-radius: 50px;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
-    font-family: $main-font;
-    display: inline-block;
-    transition: background-color 0.3s;
     font-family: $heading-font;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+    animation: buttonPop 0.8s ease-out 1.2s both;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    border: 2px solid transparent;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background: linear-gradient(135deg, lighten($primary-color, 5%) 0%, $primary-color 100%);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(1.02);
     }
   }
 
   @media (max-width: 768px) {
+    padding: 80px 20px;
+    min-height: 80vh;
+
     h1 {
       font-size: 2.2rem;
     }
@@ -80,7 +188,8 @@
     }
 
     .download-btn {
-      padding: 10px 20px;
+      padding: 14px 28px;
+      font-size: 0.9rem;
     }
   }
 }

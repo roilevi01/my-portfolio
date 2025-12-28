@@ -1,32 +1,102 @@
 @use "../../../styles/variables" as *;
 
 .footer {
-  background-color: darken($background-dark, 10%);
-  padding: 30px 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1a1a2e 100%);
+  padding: 50px 0;
   text-align: center;
   font-family: $main-font;
-  border-top: 2px solid $primary-color;
+  border-top: 2px solid rgba(52, 152, 219, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $primary-color,
+      transparent
+    );
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
   .footer-text {
-    color: $text-light;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin-bottom: 25px;
     font-family: $heading-font;
   }
 
   .social-icons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 
     a {
       color: $primary-color;
-      font-size: 1.5rem;
-      transition: transform 0.3s, color 0.3s;
+      font-size: 1.8rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(52, 152, 219, 0.1);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(52, 152, 219, 0.3), transparent);
+        transform: translate(-50%, -50%);
+        transition: width 0.4s, height 0.4s;
+      }
 
       &:hover {
-        color: lighten($primary-color, 10%);
-        transform: scale(1.2);
+        color: white;
+        transform: translateY(-5px) scale(1.1);
+        background-color: rgba(52, 152, 219, 0.3);
+        box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+
+        &::before {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      &:active {
+        transform: translateY(-3px) scale(1.05);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    .social-icons {
+      gap: 25px;
+
+      a {
+        font-size: 1.5rem;
+        width: 45px;
+        height: 45px;
       }
     }
   }

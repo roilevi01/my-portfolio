@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "styles/variables";
+@use "styles/variables" as *;
+@use "styles/animations";
 @import "animate.css/animate.min.css";
 
 * {
@@ -17,10 +18,30 @@ body {
   background-color: $background-dark;
   color: $text-light;
 }
+
 body {
   max-width: 100%;
   overflow-x: hidden;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Smooth scroll with reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

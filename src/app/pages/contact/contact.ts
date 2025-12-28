@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, AfterViewInit, inject } from '@angular/core';
 import emailjs from 'emailjs-com';
 import { CustomSnackbarComponent } from '../snackbar/custom-snackbar.component';
 import { CommonModule } from '@angular/common';
+import { IntersectionObserverService } from '../../services/intersection-observer.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,9 +11,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
-export class Contact {
+export class Contact implements AfterViewInit {
   snackBarType = signal<'success' | 'error'>('success');
   showSnackbar = signal(false);
+  private intersectionObserver = inject(IntersectionObserverService);
+
+  ngAfterViewInit(): void {
+    const form = document.querySelector('.contact-form');
+    if (form) {
+      this.intersectionObserver.observeElement(form, (entry: IntersectionObserverEntry) => {
+        entry.target.classList.add('visible');
+      });
+    }
+  }
 
   onSubmit(event: Event) {
     event.preventDefault();

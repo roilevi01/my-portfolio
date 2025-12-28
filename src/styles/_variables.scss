@@ -14,30 +14,40 @@ $heading-font: "Rajdhani", sans-serif;
 
 .section-title {
   font-family: "Rajdhani", sans-serif;
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 5vw, 2.8rem);
   font-weight: 700;
   text-align: center;
   color: $primary-color;
   position: relative;
   display: inline-block;
   animation: slideFadeIn 1s ease forwards;
+  margin-bottom: 1rem;
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -10px;
+    bottom: -12px;
     left: 50%;
     width: 0;
     height: 4px;
-    background-color: $primary-color;
+    background: linear-gradient(90deg, transparent, $primary-color, transparent);
     transform: translateX(-50%);
-    animation: underlineExpand 1s ease 0.3s forwards;
+    animation: underlineExpand 1.2s ease 0.4s forwards;
+    border-radius: 2px;
   }
 
-  // 👇 זה מחוץ ל-nesting פנימי
   &:hover {
     color: lighten($primary-color, 10%);
     cursor: default;
+
+    &::after {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        lighten($primary-color, 10%),
+        transparent
+      );
+    }
   }
 }
 

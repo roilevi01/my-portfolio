@@ -1,5 +1,6 @@
 import { Component, inject, AfterViewInit } from '@angular/core';
 import { ScrollService } from '../../services/scroll.service';
+import { IntersectionObserverService } from '../../services/intersection-observer.service';
 
 @Component({
   selector: 'app-about',
@@ -9,6 +10,7 @@ import { ScrollService } from '../../services/scroll.service';
 })
 export class About implements AfterViewInit {
   private scroll = inject(ScrollService);
+  private intersectionObserver = inject(IntersectionObserverService);
 
   scrollToContactSlowly(event: Event) {
     event.preventDefault();
@@ -16,21 +18,20 @@ export class About implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const image = document.querySelector('.bounce-up-from-footer');
-    if (!image) return;
+    // Animate image
+    const image = document.querySelector('.about img');
+    if (image) {
+      this.intersectionObserver.observeElement(image, (entry: IntersectionObserverEntry) => {
+        entry.target.classList.add('visible');
+      });
+    }
 
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-            obs.unobserve(entry.target); // אנימציה רק פעם אחת
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(image);
+    // Animate text
+    const text = document.querySelector('.about .text');
+    if (text) {
+      this.intersectionObserver.observeElement(text, (entry: IntersectionObserverEntry) => {
+        entry.target.classList.add('visible');
+      });
+    }
   }
 }
