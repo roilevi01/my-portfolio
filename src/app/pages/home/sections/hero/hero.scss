@@ -1,349 +1,415 @@
 @use "../../../../../styles/variables" as *;
+@use "../../../../../styles/animations" as *;
 
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes heroFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes nameReveal {
-  from {
-    opacity: 0;
-    transform: translateX(-30px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-@keyframes titleSlide {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes buttonPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes particleFloat {
-  0% {
-    transform: translateY(100vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) translateX(100px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-@keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(52, 152, 219, 0.3), 0 0 40px rgba(52, 152, 219, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(52, 152, 219, 0.5), 0 0 60px rgba(52, 152, 219, 0.2);
-  }
-}
+/* =========================
+   Hero – Premium Cream/Gold (Refined)
+========================= */
 
 .hero {
-  text-align: center;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: $text-light;
-  padding: 120px 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: relative;
   overflow: hidden;
+  text-align: center;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle at 20% 50%,
-      rgba(52, 152, 219, 0.15) 0%,
-      transparent 50%
+  /* ✅ smaller than before */
+  min-height: 78vh;
+  display: grid;
+  place-items: center;
+
+  padding: clamp(4.6rem, 8vh, 6.2rem) 0 clamp(2.6rem, 5.5vh, 3.8rem);
+  background: linear-gradient(180deg, #fdfdfd 0%, #f6f4f1 55%, #f1eee9 100%);
+  color: $text-dark;
+}
+
+/* =========================
+   Background layers (uses your .hero-bg)
+========================= */
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  /* ✅ reduced highlight */
+  background: radial-gradient(
+      700px 420px at 22% 18%,
+      rgba(191, 167, 106, 0.16),
+      transparent 62%
+    ),
+    radial-gradient(
+      620px 380px at 80% 22%,
+      rgba(191, 167, 106, 0.11),
+      transparent 62%
+    ),
+    radial-gradient(
+      820px 520px at 50% 86%,
+      rgba(0, 0, 0, 0.05),
+      transparent 60%
     );
-    pointer-events: none;
-    animation: gradientMove 8s ease infinite;
+}
+
+/* subtle animated gold glow (smaller & softer) */
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(
+      circle at 35% 20%,
+      rgba(191, 167, 106, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 70% 32%,
+      rgba(191, 167, 106, 0.1),
+      transparent 60%
+    );
+  animation: heroAmbient 16s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes heroAmbient {
+  0% {
+    transform: translate(-3.5%, -3%) scale(1);
+  }
+  50% {
+    transform: translate(3.5%, 3%) scale(1.03);
+  }
+  100% {
+    transform: translate(-3.5%, -3%) scale(1);
+  }
+}
+
+/* very light vignette for depth */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    1200px 800px at 50% 25%,
+    transparent 52%,
+    rgba(0, 0, 0, 0.06) 100%
+  );
+  opacity: 0.65;
+}
+
+/* =========================
+   Content
+========================= */
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  display: grid;
+  gap: 0.95rem;
+  justify-items: center;
+
+  /* subtle float (premium but not too much) */
+  animation: heroFloat 8s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* =========================
+   Title
+========================= */
+
+.hero-title {
+  font-family: $heading-font;
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: 0.2px;
+  font-size: clamp(2.05rem, 4.9vw, 4.1rem);
+  color: $text-dark;
+
+  display: grid;
+  gap: 0.48rem;
+}
+
+.greeting {
+  font-size: 0.42em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(28, 28, 28, 0.62);
+}
+
+.role {
+  font-size: 0.38em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(191, 167, 106, 0.95);
+}
+
+/* =========================
+   Name animation
+========================= */
+
+.name {
+  display: inline-flex;
+  gap: 0.02em;
+  position: relative;
+}
+
+/* refined underline glow (smaller) */
+.name::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.14em;
+  transform: translateX(-50%);
+  width: 64%;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 30% 50%,
+    rgba(191, 167, 106, 0.45),
+    transparent 72%
+  );
+  filter: blur(2px);
+  opacity: 0.85;
+  animation: underlinePulse 2.8s ease-in-out infinite;
+}
+
+@keyframes underlinePulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(0.94);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1.05);
+    opacity: 1;
+  }
+}
+
+.letter {
+  animation: floatBounce 1.15s cubic-bezier(0.16, 1, 0.3, 1) 2 both;
+  animation-delay: calc(var(--i) * 70ms + 180ms);
+  will-change: transform;
+}
+
+@keyframes floatBounce {
+  0% {
+    transform: translateY(0);
+  }
+  22% {
+    transform: translateY(-10px);
+  }
+  42% {
+    transform: translateY(4px);
+  }
+  64% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   Subtitle (no ugly box)
+========================= */
+
+.hero-sub {
+  max-width: 60ch;
+  line-height: 1.85;
+  font-size: clamp(1rem, 1.15vw, 1.08rem);
+  color: rgba(28, 28, 28, 0.74);
+
+  /* elegant glass strip instead of a square */
+  padding: 0.9rem 1.05rem;
+  border-radius: 999px;
+
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(191, 167, 106, 0.18),
+      transparent 55%
+    ),
+    rgba(255, 255, 255, 0.66);
+
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+
+  /* no hard border */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-sub:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   Actions (real buttons + link animations)
+========================= */
+
+.hero-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Primary button: matches your site */
+.hero-actions .btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+
+  padding: 0.95rem 1.2rem;
+  border-radius: 999px;
+
+  font-family: $heading-font;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+
+  color: #1c1c1c;
+  background: linear-gradient(135deg, #e7d7a1, #bfa76a);
+  border: 0;
+
+  box-shadow: 0 14px 34px rgba(191, 167, 106, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-actions .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at top,
+    rgba(255, 255, 255, 0.55),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.hero-actions .btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 55px rgba(191, 167, 106, 0.55);
+  filter: saturate(1.02);
+}
+
+.hero-actions .btn-primary:hover::after {
+  opacity: 1;
+}
+
+.hero-actions .btn-primary:active {
+  transform: translateY(-2px);
+}
+
+/* Ghost button: looks like a button + animated underline */
+.hero-actions .btn-ghost {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.92rem 1.15rem;
+  border-radius: 999px;
+
+  font-family: $heading-font;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+
+  color: #1c1c1c;
+
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(191, 167, 106, 0.4);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* underline animation on hover */
+.hero-actions .btn-ghost::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: 10px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(191, 167, 106, 0.85);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.9;
+}
+
+.hero-actions .btn-ghost:hover {
+  transform: translateY(-4px);
+  background: rgba(191, 167, 106, 0.14);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.1);
+}
+
+.hero-actions .btn-ghost:hover::after {
+  transform: scaleX(1);
+}
+
+.hero-actions .btn-ghost:active {
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 980px) {
+  .hero {
+    min-height: 72vh;
   }
 
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: rgba(52, 152, 219, 0.6);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
-
-      &:nth-child(1) {
-        left: 20%;
-        animation: particleFloat 15s linear infinite;
-        animation-delay: 0s;
-      }
-
-      &:nth-child(2) {
-        left: 40%;
-        animation: particleFloat 18s linear infinite;
-        animation-delay: 3s;
-        width: 3px;
-        height: 3px;
-      }
-
-      &:nth-child(3) {
-        left: 60%;
-        animation: particleFloat 20s linear infinite;
-        animation-delay: 6s;
-        width: 5px;
-        height: 5px;
-      }
-
-      &:nth-child(4) {
-        left: 80%;
-        animation: particleFloat 16s linear infinite;
-        animation-delay: 2s;
-        width: 3px;
-        height: 3px;
-      }
-
-      &:nth-child(5) {
-        left: 50%;
-        animation: particleFloat 22s linear infinite;
-        animation-delay: 8s;
-      }
-    }
+  .hero__inner {
+    animation: none;
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1200px;
+  .hero-sub {
+    width: min(680px, 100%);
+    border-radius: $radius-md; /* pill -> slightly less on mobile */
+  }
+}
+
+/* =========================
+   Reduced Motion
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg::before,
+  .hero__inner,
+  .letter,
+  .name::after {
+    animation: none !important;
   }
 
-  h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-family: $heading-font;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    position: relative;
-    will-change: transform, opacity;
-
-    .greeting {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-
-      &.animate-in {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .name {
-      background: linear-gradient(
-        135deg,
-        #00c6ff 0%,
-        #0072ff 50%,
-        #00c6ff 100%
-      );
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradientMove 4s ease infinite;
-      display: inline-block;
-      font-weight: 700;
-      position: relative;
-      opacity: 0;
-      transform: translateX(-30px) scale(0.9);
-      transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s,
-        transform 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
-
-      &.animate-in {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(0, 198, 255, 0.5),
-          transparent
-        );
-        animation: gradientMove 4s ease infinite;
-      }
-    }
-
-    .title {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s,
-        transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
-
-      &.animate-in {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    br {
-      display: block;
-    }
-  }
-
-  .download-btn {
-    margin-top: 40px;
-    background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
-    padding: 16px 32px;
-    border-radius: 50px;
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    font-family: $heading-font;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-    border: 2px solid transparent;
-    opacity: 0;
-    transform: scale(0.8);
-    will-change: transform, opacity, box-shadow;
-
-    &.animate-in {
-      animation: buttonPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 50px;
-      padding: 2px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    &:hover {
-      background: linear-gradient(135deg, lighten($primary-color, 5%) 0%, $primary-color 100%);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
-      border-color: rgba(255, 255, 255, 0.2);
-      animation: glowPulse 2s ease-in-out infinite;
-
-      &::before {
-        opacity: 1;
-      }
-    }
-
-    &:active {
-      transform: translateY(-1px) scale(1.02);
-    }
-  }
-
-  @media (max-width: 768px) {
-    padding: 80px 20px;
-    min-height: 80vh;
-
-    h1 {
-      font-size: 2.2rem;
-    }
-
-    .download-btn {
-      padding: 14px 28px;
-      font-size: 0.9rem;
-    }
-
-    .hero-background .particle {
-      display: none; // Hide particles on mobile for performance
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-    }
-
-    .hero-background .particle {
-      display: none;
-    }
+  .hero-sub,
+  .btn-primary,
+  .btn-ghost {
+    transition: none !important;
   }
 }

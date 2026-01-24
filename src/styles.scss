@@ -1,9 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
 @use "styles/variables" as *;
 @use "styles/animations";
-@import "animate.css/animate.min.css";
 
-* {
+/* =========================
+   Reset
+========================= */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,37 +14,88 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  font-family: $main-font;
-  background-color: $background-dark;
-  color: $text-light;
-}
-
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-html,
-body {
   height: 100%;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+html {
+  scroll-behavior: smooth;
 }
 
-// Smooth scroll with reduced motion support
+/* =========================
+   Body (NEUTRAL)
+========================= */
+body {
+  overflow-x: hidden;
+  font-family: $main-font;
+  color: $text-dark;
+  background: none;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+   Layout Helpers
+========================= */
+.container {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+/* =========================
+   Sections (BASE ONLY)
+========================= */
+.section {
+  position: relative;
+  padding: clamp(3.6rem, 6vw, 6.2rem) 0;
+}
+
+/* divider only for dark sections */
+.section[data-divider="true"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100% - 2rem));
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   Titles (BASE, NOT FINAL)
+========================= */
+.section-title {
+  font-family: $heading-font;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+/* =========================
+   Links / Focus
+========================= */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ✅ Focus color aligned to your gold/cream palette */
+:focus-visible {
+  outline: 2px solid rgba(191, 167, 106, 0.9);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* =========================
+   Reduced Motion (Global)
+========================= */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }

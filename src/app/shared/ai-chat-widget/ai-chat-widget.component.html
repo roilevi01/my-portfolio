@@ -1,0 +1,46 @@
+<button class="fab" (click)="toggle()">{{ open ? "✕" : "💬" }}</button>
+
+<div class="panel" *ngIf="open">
+  <div class="header">הסוכן של רועי</div>
+
+  <!-- ✅ גוף הצ'אט (עם גלילה) -->
+  <div class="body" #chatBody>
+    <div
+      class="row"
+      *ngFor="let m of messages"
+      [class.user]="m.role === 'user'"
+    >
+      <div class="bubble">
+        <div class="text">{{ m.text }}</div>
+
+        <!-- ✅ כפתורים רק לבוט -->
+        <div class="actions" *ngIf="m.role === 'bot' && m.actions?.length">
+          <button
+            class="action-btn"
+            *ngFor="let a of m.actions"
+            (click)="sendQuick(a)"
+            [disabled]="loading"
+          >
+            {{ a }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="loading">
+      <div class="bubble typing">חושב...</div>
+    </div>
+  </div>
+
+  <!-- ✅ footer חייב להיות מחוץ ל-body -->
+  <div class="footer">
+    <input
+      [(ngModel)]="input"
+      placeholder="שאל שאלה..."
+      (keydown.enter)="send()"
+    />
+    <button (click)="send()" [disabled]="loading || !input.trim()">
+      שלח
+    </button>
+  </div>
+</div>

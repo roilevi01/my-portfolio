@@ -1,1 +1,31 @@
 @use "../../../styles/variables" as *;
+
+.page {
+  width: 100%;
+}
+
+/* block spacing – אחיד לכל סקשן */
+.block {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
+}
+
+/* ל-Hero לא מוסיפים padding כפול כי הוא כבר 100vh */
+.block--hero {
+  padding: 0;
+}
+
+/* קו עדין בין סקשנים (יוקרתי) */
+.block:not(.block--hero) {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1100px, calc(100% - 2rem));
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}

@@ -1,63 +1,54 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class IntersectionObserverService {
-  private observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -100px 0px',
-  };
+export type ChatApiResponse = {
+  reply: string;
+  actions?: string[];
+  session_id?: string; // ✅ תואם ל-FastAPI
+};
 
-  createObserver(
-    callback: (entry: IntersectionObserverEntry) => void,
-    options?: IntersectionObserverInit
-  ): IntersectionObserver {
-    const finalOptions = { ...this.observerOptions, ...options };
-    return new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Use requestAnimationFrame for smoother animations
-          requestAnimationFrame(() => {
-            callback(entry);
-          });
-        }
-      });
-    }, finalOptions);
+@Injectable({ providedIn: 'root' })
+export class AiAgentService {
+  // טיפ: בפרודקשן עדיף לשים את זה ב-environment
+  // private readonly url = environment.aiUrl + '/chat';
+  private readonly url = 'http://127.0.0.1:8080/chat';
+
+  private sessionId: string;
+
+  constructor(private http: HttpClient) {
+    const stored = localStorage.getItem('roi_ai_session');
+    this.sessionId = stored ?? this.createSessionId();
+    localStorage.setItem('roi_ai_session', this.sessionId);
   }
 
-  observeElement(
-    element: Element | null,
-    callback: (entry: IntersectionObserverEntry) => void,
-    options?: IntersectionObserverInit
-  ): IntersectionObserver | null {
-    if (!element) return null;
-
-    const observer = this.createObserver((entry) => {
-      callback(entry);
-      observer.unobserve(entry.target);
-    }, options);
-
-    observer.observe(element);
-    return observer;
+  send(message: string): Observable<ChatApiResponse> {
+    return this.http
+      .post<ChatApiResponse>(this.url, {
+        message,
+        session_id: this.sessionId,
+      })
+      .pipe(
+        tap((res) => {
+          // ✅ אם השרת החזיר session_id – נשמור אותו
+          if (res?.session_id && res.session_id !== this.sessionId) {
+            this.sessionId = res.session_id;
+            localStorage.setItem('roi_ai_session', this.sessionId);
+          }
+        })
+      );
   }
 
-  observeMultipleElements(
-    elements: NodeListOf<Element> | Element[],
-    callback: (entry: IntersectionObserverEntry) => void,
-    options?: IntersectionObserverInit
-  ): IntersectionObserver | null {
-    if (!elements || elements.length === 0) return null;
+  private createSessionId(): string {
+    // ✅ fallback אם randomUUID לא קיים
+    const c: Crypto | undefined = (globalThis as any).crypto;
+    if (c?.randomUUID) return c.randomUUID();
 
-    const observer = this.createObserver((entry) => {
-      callback(entry);
-    }, options);
-
-    elements.forEach((element) => {
-      observer.observe(element);
+    // UUID פשוט (מספיק לשימוש כאן)
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (ch) => {
+      const r = (Math.random() * 16) | 0;
+      const v = ch === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
     });
-
-    return observer;
   }
 }
-

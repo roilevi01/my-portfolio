@@ -1,48 +1,31 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hero',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './hero.html',
-  styleUrl: './hero.scss'
+  styleUrl: './hero.scss',
 })
 export class Hero implements AfterViewInit {
-  @ViewChild('heroTitle', { static: false }) heroTitle?: ElementRef<HTMLElement>;
-  @ViewChild('heroName', { static: false }) heroName?: ElementRef<HTMLElement>;
-  @ViewChild('heroButton', { static: false }) heroButton?: ElementRef<HTMLElement>;
+  nameChars = Array.from('Roi Levi');
+
+  @ViewChild('heroTitle', { static: false })
+  heroTitle?: ElementRef<HTMLElement>;
+  @ViewChild('heroButton', { static: false })
+  heroButton?: ElementRef<HTMLElement>;
 
   ngAfterViewInit(): void {
-    // Add entrance animations with proper timing
     const greeting = this.heroTitle?.nativeElement.querySelector('.greeting');
-    if (greeting) {
-      requestAnimationFrame(() => {
-        greeting.classList.add('animate-in');
-      });
-    }
-
-    if (this.heroName?.nativeElement) {
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          this.heroName?.nativeElement.classList.add('animate-in');
-        });
-      }, 300);
-    }
+    greeting?.classList.add('animate-in');
 
     const title = this.heroTitle?.nativeElement.querySelector('.title');
-    if (title) {
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          title.classList.add('animate-in');
-        });
-      }, 600);
-    }
+    setTimeout(() => title?.classList.add('animate-in'), 900);
 
-    if (this.heroButton?.nativeElement) {
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          this.heroButton?.nativeElement.classList.add('animate-in');
-        });
-      }, 900);
-    }
+    setTimeout(
+      () => this.heroButton?.nativeElement.classList.add('animate-in'),
+      1400
+    );
   }
 }

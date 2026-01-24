@@ -1,165 +1,200 @@
 @use "../../../../../styles/variables" as *;
 
+/* =========================
+   Services – Premium Section
+========================= */
+
 .services {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color: white;
-  padding: 80px 20px;
-  text-align: center;
   position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f4f1 55%, #efece6 100%);
+  color: $text-dark;
   overflow: hidden;
+}
+
+/* ambient glow */
+.services::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(191, 167, 106, 0.22),
+    transparent 60%
+  );
+  animation: servicesAmbient 18s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes servicesAmbient {
+  0% {
+    transform: translate(-6%, -6%);
+  }
+  50% {
+    transform: translate(6%, 6%);
+  }
+  100% {
+    transform: translate(-6%, -6%);
+  }
+}
+
+/* =========================
+   Inner (NO @extend)
+========================= */
+
+.services__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(3.6rem, 6vw, 6.2rem) 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   Header
+========================= */
+
+.services__head {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+
+  .section-title {
+    color: $text-dark;
+  }
+
+  .subtitle {
+    color: $muted-dark;
+  }
+}
+
+/* =========================
+   Grid
+========================= */
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.1rem, 2.5vw, 1.6rem);
+}
+
+/* =========================
+   Card – Main Element
+========================= */
+
+.services__card {
+  position: relative;
+  border-radius: $radius-lg;
+  padding: 1.4rem;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  /* ✅ was: $border-soft (not defined in your variables) */
+  border: 1px solid $border;
+
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
 
   &::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: -1px;
     background: radial-gradient(
-      circle at 50% 50%,
-      rgba(52, 152, 219, 0.08) 0%,
+      circle at top,
+      rgba(191, 167, 106, 0.38),
       transparent 70%
     );
+    opacity: 0;
+    transition: opacity 420ms ease;
     pointer-events: none;
   }
 
-  h2 {
-    margin-bottom: 50px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
-
-  .service-card {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    border: 2px solid rgba(52, 152, 219, 0.3);
-    border-radius: 16px;
-    padding: 35px 25px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    will-change: transform, opacity, box-shadow;
-
-    &.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    &:nth-child(1).visible {
-      transition-delay: 0.1s;
-    }
-    &:nth-child(2).visible {
-      transition-delay: 0.2s;
-    }
-    &:nth-child(3).visible {
-      transition-delay: 0.3s;
-    }
-    &:nth-child(4).visible {
-      transition-delay: 0.4s;
-    }
-    &:nth-child(5).visible {
-      transition-delay: 0.5s;
-    }
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 38px 85px rgba(0, 0, 0, 0.18);
 
     &::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(
-        circle,
-        rgba(52, 152, 219, 0.1) 0%,
-        transparent 70%
-      );
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 16px;
-      padding: 2px;
-      background: linear-gradient(
-        135deg,
-        rgba(52, 152, 219, 0.5),
-        rgba(0, 198, 255, 0.5)
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    h3 {
-      font-size: 1.4rem;
-      color: $primary-color;
-      margin-bottom: 15px;
-      font-weight: 600;
-      position: relative;
-      z-index: 1;
-    }
-
-    p,
-    h3 {
-      font-family: $heading-font;
-    }
-
-    p {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.7;
-      position: relative;
-      z-index: 1;
-    }
-
-    &:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 20px 40px rgba(52, 152, 219, 0.4);
-      border-color: rgba(52, 152, 219, 0.6);
-
-      &::before {
-        opacity: 1;
-      }
-
-      &::after {
-        opacity: 1;
-      }
+      opacity: 1;
     }
   }
+}
 
-  @media (max-width: 768px) {
-    padding: 60px 15px;
+/* =========================
+   Card Top
+========================= */
 
-    .services-grid {
-      grid-template-columns: 1fr;
-      gap: 25px;
-    }
+.services__top {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 0.7rem;
 
-    .service-card {
-      padding: 30px 20px;
-    }
+  h3 {
+    margin: 0;
+    font-family: $heading-font;
+    font-weight: 900;
+    font-size: 1.25rem;
+  }
+}
+
+.services__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(191, 167, 106, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   Text
+========================= */
+
+.services__desc {
+  color: $muted-dark;
+  line-height: 1.75;
+  margin: 0 0 1rem;
+}
+
+/* =========================
+   Tags
+========================= */
+
+.services__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.services__tag {
+  padding: 7px 11px;
+  border-radius: 999px;
+
+  background: rgba(191, 167, 106, 0.16);
+  border: 1px solid rgba(191, 167, 106, 0.35);
+
+  color: #1c1c1c;
+  font-family: $heading-font;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 980px) {
+  .services__grid {
+    grid-template-columns: 1fr;
   }
 }

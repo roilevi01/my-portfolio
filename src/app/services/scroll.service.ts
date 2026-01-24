@@ -1,43 +1,43 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ScrollService {
-  scrollToElementSlowly(id: string, offset: number = 0): void {
+  scrollToElementSlowly(id: string): void {
     const target = document.getElementById(id);
-    if (!target) {
-      console.warn(`Element with id "${id}" not found`);
-      return;
-    }
+    if (!target) return;
 
-    const targetY = target.getBoundingClientRect().top + window.scrollY - offset;
+    const headerH = this.getHeaderOffset();
+    const targetY =
+      target.getBoundingClientRect().top + window.scrollY - headerH;
+
     const startY = window.scrollY;
     const distance = targetY - startY;
-    const duration = 1200;
+
+    const duration = 1400; // איטי ונעים
     const startTime = performance.now();
 
-    const step = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeProgress = this.easeInOutCubic(progress);
-      
-      window.scrollTo({
-        top: startY + distance * easeProgress,
-        behavior: 'auto' // We're handling smooth scroll manually
-      });
+    const step = (now: number) => {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = this.easeInOutQuint(t);
 
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
+      window.scrollTo(0, startY + distance * eased);
+
+      if (t < 1) requestAnimationFrame(step);
     };
 
     requestAnimationFrame(step);
   }
 
-  private easeInOutCubic(t: number): number {
-    return t < 0.5 
-      ? 4 * t * t * t 
-      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  private getHeaderOffset(): number {
+    const header = document.querySelector(
+      'header.site-header'
+    ) as HTMLElement | null;
+    if (!header) return 0;
+    return Math.round(header.getBoundingClientRect().height) + 10; // עוד קצת מרווח
+  }
+
+  private easeInOutQuint(t: number): number {
+    return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
   }
 }

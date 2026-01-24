@@ -1,21 +1,43 @@
 <header class="site-header" [class.scrolled]="isScrolled">
-  <div class="logo">
-    <img
-      src="assets/ChatGPT Image Jun 26, 2025, 12_11_43 PM.png"
-      alt="logo-myself"
-    />
+  <div class="site-header__inner">
+    <a
+      class="brand"
+      (click)="scrollTo('resume', $event)"
+      aria-label="Go to top"
+    >
+    </a>
+
+    <button
+      class="hamburger"
+      type="button"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen"
+      [attr.aria-label]="menuOpen ? 'Close menu' : 'Open menu'"
+    >
+      <span class="hamburger-icon" aria-hidden="true"></span>
+    </button>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a class="nav-link" (click)="scrollTo('resume', $event)">Resume</a>
+      <a class="nav-link" (click)="scrollTo('projects', $event)">Projects</a>
+      <a class="nav-link" (click)="scrollTo('services', $event)">Services</a>
+      <a class="nav-link" (click)="scrollTo('contact', $event)">Contact</a>
+    </nav>
   </div>
 
-  <button
-    class="hamburger"
-    (click)="toggleMenu()"
-    [attr.aria-expanded]="menuOpen"
-    [attr.aria-label]="menuOpen ? 'Close menu' : 'Open menu'"
-  >
-    {{ menuOpen ? '✖' : '☰' }}
-  </button>
+  <!-- Mobile drawer + backdrop -->
+  <div
+    class="backdrop"
+    [class.open]="menuOpen"
+    (click)="closeMenu()"
+    aria-hidden="true"
+  ></div>
 
-  <nav class="nav-links" [class.open]="menuOpen">
+  <nav
+    class="mobile-drawer"
+    [class.open]="menuOpen"
+    aria-label="Mobile navigation"
+  >
     <a (click)="scrollTo('resume', $event)">Resume</a>
     <a (click)="scrollTo('projects', $event)">Projects</a>
     <a (click)="scrollTo('services', $event)">Services</a>

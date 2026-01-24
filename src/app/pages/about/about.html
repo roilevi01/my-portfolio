@@ -1,35 +1,51 @@
-<section class="about">
-  <img #aboutImage src="assets/picture_of_me.jpeg" alt="Roi Levi" />
+<section class="about section" id="about">
+  <div class="about__inner">
+    <div class="about-media" [appRevealOnScroll]="'reveal reveal--scale'">
+      <div class="avatar">
+        <span class="avatar-glow" aria-hidden="true"></span>
+        <img src="assets/picture_of_me.jpeg" alt="Roi Levi" />
+      </div>
+    </div>
 
-  <div #aboutText class="text">
-    <h2 class="section-title">About Me</h2>
+    <div class="about-text" [appRevealOnScroll]="'reveal reveal--right'">
+      <h2 class="section-title">About Me</h2>
 
-    <p>
-      I'm <strong>Roi Levi</strong>, a <strong>Full Stack Developer</strong>
-      specializing in building
-      <strong>end-to-end, production-ready web applications</strong>.<br />
+      <p>
+        I'm <strong>Roi Levi</strong>, a
+        <strong>Full Stack Developer</strong> building
+        <strong>end-to-end, production-ready web applications</strong>.
+      </p>
 
-      I work with technologies such as
-      <strong
-        >React, Angular, Node.js, C#, .NET Core, MongoDB, and SQL Server</strong
-      >, focusing on <strong>clean architecture</strong>,
-      <strong>responsive user interfaces</strong>, and
-      <strong>robust backend logic</strong>.<br />
+      <p>
+        I work with
+        <strong
+          >React, Angular, Node.js, C#, .NET Core, MongoDB, and SQL
+          Server</strong
+        >, focusing on <strong>clean architecture</strong>,
+        <strong>responsive UI</strong>, and
+        <strong>robust backend logic</strong>.
+      </p>
 
-      My experience includes developing
-      <strong>real-world systems</strong>—from management platforms to
-      interactive applications—while emphasizing <strong>UX/UI</strong>,
-      <strong>RESTful APIs</strong>, <strong>maintainable code</strong>, and
-      <strong>system reliability</strong>.<br />
+      <p>
+        I care about <strong>UX/UI</strong>, <strong>RESTful APIs</strong>, and
+        <strong>maintainable code</strong> — with a practical, results-driven
+        mindset.
+      </p>
 
-      With strong <strong>attention to detail</strong> and a practical,
-      results-driven mindset, I'm a <strong>fast learner</strong> who
-      continuously improves and enjoys working both independently and as part of
-      a team.
-    </p>
+      <div class="actions">
+        <a
+          class="btn-primary"
+          href="assets/CV_Roi_Levi_FullStack.pdf"
+          download="Roi_Levi_FullStack_CV.pdf"
+        >
+          <span aria-hidden="true">📄</span>
+          <span>Download CV</span>
+        </a>
 
-    <a class="contact-btn" href="#" (click)="scrollToContactSlowly($event)">
-      Contact Me
-    </a>
+        <a class="btn-ghost" href="#" (click)="scrollToContactSlowly($event)">
+          <span>Contact Me</span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>

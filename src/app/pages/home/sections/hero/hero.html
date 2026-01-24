@@ -1,25 +1,39 @@
-<section id="resume" class="hero">
-  <div class="hero-background">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-  </div>
-  <div class="hero-content">
-    <h1 #heroTitle>
-      <span class="greeting">Hi, I'm</span> <br />
-      <span #heroName class="name">Roi Levi</span><br />
-      <span class="title">a Full Stack Developer</span>
+<section #heroSection id="resume" class="hero section section--hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <h1 class="hero-title">
+      <span class="greeting">Hi, I'm</span>
+
+      <span class="name" aria-label="Roi Levi">
+        <ng-container *ngFor="let ch of nameChars; let i = index">
+          <span class="letter" [style.--i]="i">
+            {{ ch === ' ' ? '\u00A0' : ch }}
+          </span>
+        </ng-container>
+      </span>
+
+      <span class="role">Full Stack Developer</span>
     </h1>
-    <a
-      #heroButton
-      class="download-btn"
-      href="assets/CV_Roi_Levi_FullStack.pdf"
-      download="Roi_Levi_FullStack_CV.pdf"
-      aria-label="Download Roi Levi's CV"
-    >
-      <span aria-hidden="true">📄</span> Download CV
-    </a>
+
+    <p class="hero-sub">
+      Building clean, scalable web apps with modern UI/UX and smooth interactions.
+    </p>
+
+    <div class="hero-actions">
+      <a
+        class="btn-primary"
+        href="assets/CV_Roi_Levi_FullStack.pdf"
+        download="Roi_Levi_FullStack_CV.pdf"
+        aria-label="Download Roi Levi's CV"
+      >
+        <span aria-hidden="true">📄</span>
+        <span>Download CV</span>
+      </a>
+
+      <a class="btn-ghost" href="#contact" aria-label="Go to contact section">
+        Contact
+      </a>
+    </div>
   </div>
 </section>

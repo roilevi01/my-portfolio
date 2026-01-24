@@ -1,44 +1,19 @@
-import { Component, inject, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ScrollService } from '../../services/scroll.service';
-import { IntersectionObserverService } from '../../services/intersection-observer.service';
+import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  styleUrls: ['./about.scss'],
+  imports: [RevealOnScrollDirective],
   templateUrl: './about.html',
+  styleUrls: ['./about.scss'],
 })
-export class About implements AfterViewInit {
+export class About {
   private scroll = inject(ScrollService);
-  private intersectionObserver = inject(IntersectionObserverService);
 
-  @ViewChild('aboutImage', { static: false }) aboutImage?: ElementRef<HTMLImageElement>;
-  @ViewChild('aboutText', { static: false }) aboutText?: ElementRef<HTMLDivElement>;
-
-  scrollToContactSlowly(event: Event) {
+  scrollToContactSlowly(event: Event): void {
     event.preventDefault();
     this.scroll.scrollToElementSlowly('contact');
-  }
-
-  ngAfterViewInit() {
-    // Animate image
-    if (this.aboutImage?.nativeElement) {
-      this.intersectionObserver.observeElement(
-        this.aboutImage.nativeElement,
-        (entry: IntersectionObserverEntry) => {
-          entry.target.classList.add('visible');
-        }
-      );
-    }
-
-    // Animate text
-    if (this.aboutText?.nativeElement) {
-      this.intersectionObserver.observeElement(
-        this.aboutText.nativeElement,
-        (entry: IntersectionObserverEntry) => {
-          entry.target.classList.add('visible');
-        }
-      );
-    }
   }
 }

@@ -1,24 +1,86 @@
-<section id="contact" class="contact-section">
-  <h2 class="section-title">Contact Me</h2>
-  <p>Have a question or want to work together? Leave a message!</p>
+<section id="contact" class="contact section">
+  <div class="contact__inner">
+    <header class="contact__head" [appRevealOnScroll]="'reveal'">
+      <h2 class="section-title">Contact Me</h2>
+      <p class="subtitle">
+        Have a question or want to work together? Leave a message.
+      </p>
+    </header>
 
-  <form #contactForm (submit)="onSubmit($event)" class="contact-form">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea
-      name="message"
-      rows="5"
-      placeholder="Your Message"
-      required
-    ></textarea>
+    <div class="contact__content">
+      <!-- Left: Info -->
+      <aside class="info" [appRevealOnScroll]="'reveal reveal--left'">
+        <div class="contact__panel">
+          <h3>Let’s build something great</h3>
+          <p>
+            I’m available for freelance projects and full-time roles. I usually
+            reply within 24–48 hours.
+          </p>
 
-    <button type="submit">Send Message</button>
-  </form>
+          <ul class="contact__meta">
+            <li>
+              <span class="k">Email</span><span class="v">Use the form →</span>
+            </li>
+            <li>
+              <span class="k">Location</span><span class="v">Israel</span>
+            </li>
+            <li>
+              <span class="k">Focus</span>
+              <span class="v">Full-Stack · UX · Clean Code</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
 
-  <app-custom-snackbar
-    *ngIf="showSnackbar()"
-    [type]="snackBarType()"
-    [message]="snackBarType() === 'success' ? 'Message sent successfully!' : 'Failed to send message. Try again.'"
-    (dismissed)="onDismissed()"
-  />
+      <!-- Right: Form -->
+      <form
+        class="contact__panel"
+        (submit)="onSubmit($event)"
+        [appRevealOnScroll]="'reveal reveal--up'"
+      >
+        <div class="contact__formGrid">
+          <label class="contact__field">
+            <span>Your Name</span>
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+
+          <label class="contact__field">
+            <span>Your Email</span>
+            <input
+              type="email"
+              name="email"
+              placeholder="name@email.com"
+              required
+            />
+          </label>
+
+          <label class="contact__field contact__full">
+            <span>Your Message</span>
+            <textarea
+              name="message"
+              rows="6"
+              placeholder="Tell me about your idea..."
+              required
+            ></textarea>
+          </label>
+        </div>
+
+        <button class="contact__btn" type="submit" [disabled]="isSending()">
+          <span class="btn-text">
+            {{ isSending() ? 'Sending...' : 'Send Message' }}
+          </span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+
+    <app-custom-snackbar
+      *ngIf="showSnackbar()"
+      [type]="snackBarType()"
+      [message]="snackBarType() === 'success'
+        ? 'Message sent successfully!'
+        : 'Failed to send message. Try again.'"
+      (dismissed)="onDismissed()"
+    />
+  </div>
 </section>

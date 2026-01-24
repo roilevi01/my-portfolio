@@ -1,59 +1,49 @@
-import { Component, signal, AfterViewInit, inject, ElementRef, ViewChild } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import emailjs from 'emailjs-com';
 import { CustomSnackbarComponent } from '../snackbar/custom-snackbar.component';
-import { CommonModule } from '@angular/common';
-import { IntersectionObserverService } from '../../services/intersection-observer.service';
+import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, CustomSnackbarComponent],
+  imports: [CommonModule, CustomSnackbarComponent, RevealOnScrollDirective],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss'],
 })
-export class Contact implements AfterViewInit {
+export class Contact {
+  isSending = signal(false);
+
   snackBarType = signal<'success' | 'error'>('success');
   showSnackbar = signal(false);
-  private intersectionObserver = inject(IntersectionObserverService);
 
-  @ViewChild('contactForm', { static: false }) contactForm?: ElementRef<HTMLFormElement>;
-
-  ngAfterViewInit(): void {
-    if (this.contactForm?.nativeElement) {
-      this.intersectionObserver.observeElement(
-        this.contactForm.nativeElement,
-        (entry: IntersectionObserverEntry) => {
-          entry.target.classList.add('visible');
-        }
-      );
-    }
-  }
-
-  onSubmit(event: Event) {
+  async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
 
-    emailjs
-      .sendForm(
+    if (this.isSending()) return;
+    this.isSending.set(true);
+
+    try {
+      await emailjs.sendForm(
         'service_4flqi53',
         'template_rahm6gh',
         event.target as HTMLFormElement,
         '-5mmTYNqLYdZmaKT4'
-      )
-      .then(
-        () => {
-          this.snackBarType.set('success');
-          this.showSnackbar.set(true);
-          (event.target as HTMLFormElement).reset();
-        },
-        (error: any) => {
-          console.error('FAILED...', error);
-          this.snackBarType.set('error');
-          this.showSnackbar.set(true);
-        }
       );
+
+      this.snackBarType.set('success');
+      this.showSnackbar.set(true);
+      (event.target as HTMLFormElement).reset();
+    } catch (err) {
+      console.error('FAILED...', err);
+      this.snackBarType.set('error');
+      this.showSnackbar.set(true);
+    } finally {
+      this.isSending.set(false);
+    }
   }
 
-  onDismissed() {
+  onDismissed(): void {
     this.showSnackbar.set(false);
   }
 }

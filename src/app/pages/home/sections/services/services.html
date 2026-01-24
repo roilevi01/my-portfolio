@@ -1,45 +1,30 @@
-<section id="services" class="services">
-  <h2 class="section-title">Services</h2>
-
-  <div class="services-grid">
-    <div #serviceCard class="service-card">
-      <h3>Full Stack Web Development</h3>
-      <p>
-        End-to-end web applications built from frontend to backend, including
-        database design, APIs, and deployment-ready architecture.
+<section id="services" class="services section">
+  <div class="services__inner">
+    <header class="services__head" [appRevealOnScroll]="'reveal'">
+      <h2 class="section-title">Services</h2>
+      <p class="subtitle">
+        What I can build for you — clean, fast, and production-ready.
       </p>
-    </div>
+    </header>
 
-    <div #serviceCard class="service-card">
-      <h3>Backend & API Development</h3>
-      <p>
-        Secure and scalable RESTful APIs with authentication, authorization, and
-        clean service-based architecture.
-      </p>
-    </div>
+    <div class="services__grid">
+      <article
+        class="services__card"
+        *ngFor="let s of services; let i = index"
+        [style.--d]="(i * 90) + 'ms'"
+        [appRevealOnScroll]="'reveal reveal--up'"
+      >
+        <div class="services__top">
+          <div class="services__icon" aria-hidden="true">{{ s.icon }}</div>
+          <h3>{{ s.title }}</h3>
+        </div>
 
-    <div #serviceCard class="service-card">
-      <h3>Automation & Bots</h3>
-      <p>
-        Custom automation solutions and real-time bots, including data-driven
-        alerts, integrations, and background processes.
-      </p>
-    </div>
+        <p class="services__desc">{{ s.description }}</p>
 
-    <div #serviceCard class="service-card">
-      <h3>Authentication & Security</h3>
-      <p>
-        User authentication and role-based access using JWT, OAuth, and secure
-        backend practices.
-      </p>
-    </div>
-
-    <div #serviceCard class="service-card">
-      <h3>System-Oriented Development</h3>
-      <p>
-        Practical, production-focused development with attention to reliability,
-        performance, and real-world system behavior.
-      </p>
+        <div class="services__tags">
+          <span class="services__tag" *ngFor="let t of s.tags">{{ t }}</span>
+        </div>
+      </article>
     </div>
   </div>
 </section>
