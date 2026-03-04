@@ -1,10 +1,11 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ThreeHeroBgComponent } from '../../../shared/three-hero-bg/three-hero-bg.component';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThreeHeroBgComponent],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
