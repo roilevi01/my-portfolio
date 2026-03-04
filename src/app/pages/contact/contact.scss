@@ -6,7 +6,7 @@
 
 .contact {
   position: relative;
-  background: linear-gradient(180deg, #fdfdfd 0%, #f6f4f1 55%, #f1eee9 100%);
+  background: linear-gradient(180deg, $bg-0 0%, $bg-1 100%);
   color: $text-dark;
   overflow: hidden;
 }
@@ -18,7 +18,7 @@
   inset: -40%;
   background: radial-gradient(
     circle at 70% 30%,
-    rgba(191, 167, 106, 0.18),
+    rgba(37, 99, 235, 0.14),
     transparent 60%
   );
   animation: contactAmbient 18s ease-in-out infinite;
@@ -42,7 +42,7 @@
 ========================= */
 
 .contact__inner {
-  max-width: 1120px;
+  max-width: 1250px;
   margin: 0 auto;
   padding: clamp(3.6rem, 6vw, 6.2rem) 1rem;
   position: relative;
@@ -85,12 +85,10 @@
   border-radius: $radius-lg;
   padding: 1.6rem;
 
-  background: rgba(255, 255, 255, 0.75);
-
-  /* ✅ was: $border-soft (not defined) */
+  background: rgba(255, 255, 255, 0.82);
   border: 1px solid $border;
 
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12),
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12),
     inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 
   backdrop-filter: blur(14px);
@@ -104,6 +102,7 @@
   font-family: $heading-font;
   font-weight: 900;
   margin-bottom: 0.6rem;
+  color: $text-dark;
 }
 
 .contact__panel p {
@@ -122,17 +121,17 @@
     grid-template-columns: 90px 1fr;
     gap: 0.8rem;
     padding-top: 0.8rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
   }
 
   .k {
     font-family: $heading-font;
     font-weight: 900;
-    color: rgba(30, 30, 30, 0.6);
+    color: rgba(15, 23, 42, 0.6);
   }
 
   .v {
-    color: rgba(30, 30, 30, 0.85);
+    color: rgba(15, 23, 42, 0.85);
   }
 }
 
@@ -142,28 +141,31 @@
 
 .contact__formGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* ✅ לא בורח */
   gap: 1rem;
 }
 
 .contact__field {
   display: grid;
   gap: 0.45rem;
+  min-width: 0; /* ✅ חשוב בגריד */
 
   span {
     font-family: $heading-font;
     font-weight: 900;
-    color: rgba(30, 30, 30, 0.7);
+    color: rgba(15, 23, 42, 0.7);
   }
 
   input,
   textarea {
     width: 100%;
+    min-width: 0; /* ✅ חשוב */
+    box-sizing: border-box; /* ✅ ביטחון */
     padding: 0.95rem 1rem;
     border-radius: 14px;
 
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(15, 23, 42, 0.12);
     color: $text-dark;
     font-family: $main-font;
 
@@ -171,17 +173,10 @@
 
     &:focus {
       outline: none;
-
-      /* ✅ was: $gold (not defined) */
-      border-color: #bfa76a;
-
-      box-shadow: 0 0 0 3px rgba(191, 167, 106, 0.25);
+      border-color: rgba(37, 99, 235, 0.55);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
     }
   }
-}
-
-.contact__full {
-  grid-column: 1 / -1;
 }
 
 /* =========================
@@ -204,20 +199,18 @@
   font-weight: 900;
   letter-spacing: 0.04em;
 
-  color: #1c1c1c;
+  color: #fff;
+  background: linear-gradient(135deg, $accent, $accent-hover);
 
-  /* ✅ was: $gold (not defined) */
-  background: linear-gradient(135deg, #e7d7a1, #bfa76a);
-
-  box-shadow: 0 18px 44px rgba(191, 167, 106, 0.45),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+  box-shadow: 0 18px 44px rgba(37, 99, 235, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 
   transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover:not(:disabled) {
     transform: translateY(-4px);
-    box-shadow: 0 26px 60px rgba(191, 167, 106, 0.55);
+    box-shadow: 0 26px 60px rgba(37, 99, 235, 0.35);
   }
 
   &:disabled {

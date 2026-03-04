@@ -6,7 +6,7 @@
 
 .about {
   position: relative;
-  background: linear-gradient(180deg, #fdfdfd 0%, #f6f4f1 55%, #f1eee9 100%);
+  background: linear-gradient(180deg, $bg-0 0%, $bg-1 100%);
   color: $text-dark;
   overflow: hidden;
 }
@@ -17,7 +17,7 @@
   inset: -40%;
   background: radial-gradient(
     circle at top left,
-    rgba(191, 167, 106, 0.18),
+    rgba(37, 99, 235, 0.14),
     transparent 60%
   );
   animation: ambientMove 18s ease-in-out infinite;
@@ -70,10 +70,10 @@
   border-radius: 999px;
   padding: 10px;
 
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.82);
   border: 1px solid $border;
 
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.16),
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.16),
     inset 0 0 0 1px rgba(255, 255, 255, 0.75);
 
   backdrop-filter: blur(14px);
@@ -92,11 +92,7 @@
   position: absolute;
   inset: -22px;
   border-radius: inherit;
-  background: radial-gradient(
-    circle,
-    rgba(191, 167, 106, 0.35),
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.28), transparent 70%);
   filter: blur(18px);
   opacity: 0.7;
   animation: glowPulse 3.8s ease-in-out infinite;
@@ -113,7 +109,6 @@
   height: 100%;
   border-radius: 999px;
 
-  /* ממלא + פחות חיתוך: נותן לך שליטה */
   object-fit: cover;
   object-position: center 12%;
 
@@ -126,10 +121,9 @@
 /* hover */
 .avatar:hover {
   transform: translateY(-6px);
-  border-color: rgba(191, 167, 106, 0.38);
-  box-shadow: 0 42px 110px rgba(0, 0, 0, 0.16),
-    0 0 0 4px rgba(191, 167, 106, 0.12),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.78);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 42px 110px rgba(15, 23, 42, 0.16),
+    0 0 0 4px rgba(37, 99, 235, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.78);
 }
 
 .avatar:hover img {
@@ -225,14 +219,13 @@
 
 /* primary */
 .btn-primary {
-  color: #1c1c1c;
-  background: linear-gradient(135deg, #e7d7a1, #bfa76a);
+  color: #fff;
+  background: linear-gradient(135deg, $accent, $accent-hover);
   border: 0;
 
-  box-shadow: 0 12px 28px rgba(191, 167, 106, 0.42),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 
-  /* shine */
   &::after {
     content: "";
     position: absolute;
@@ -249,7 +242,7 @@
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 18px 44px rgba(191, 167, 106, 0.55);
+    box-shadow: 0 18px 44px rgba(37, 99, 235, 0.45);
   }
 
   &:hover::after {
@@ -263,17 +256,18 @@
 
 /* ghost secondary */
 .btn-ghost {
-  color: rgba(28, 28, 28, 0.88);
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(191, 167, 106, 0.35);
+  color: rgba(15, 23, 42, 0.9);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(37, 99, 235, 0.35);
 
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08),
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08),
     inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(191, 167, 106, 0.5);
-    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.5);
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.1);
+    background: rgba(37, 99, 235, 0.08);
   }
 
   &:active {
@@ -284,7 +278,7 @@
 /* focus */
 .btn-primary:focus-visible,
 .btn-ghost:focus-visible {
-  outline: 2px solid rgba(191, 167, 106, 0.75);
+  outline: 2px solid rgba(37, 99, 235, 0.75);
   outline-offset: 4px;
 }
 

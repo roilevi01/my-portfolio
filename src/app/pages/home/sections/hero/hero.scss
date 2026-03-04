@@ -1,8 +1,8 @@
 @use "../../../../../styles/variables" as *;
-@use "../../../../../styles/animations" as *;
+@use "../../../../../styles/animations";
 
 /* =========================
-   Hero – Premium Cream/Gold (Refined)
+   Hero – Premium Modern Tech (Palette A)
 ========================= */
 
 .hero {
@@ -16,7 +16,9 @@
   place-items: center;
 
   padding: clamp(4.6rem, 8vh, 6.2rem) 0 clamp(2.6rem, 5.5vh, 3.8rem);
-  background: linear-gradient(180deg, #fdfdfd 0%, #f6f4f1 55%, #f1eee9 100%);
+
+  /* ✅ Modern Tech background */
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 55%, #eef2f6 100%);
   color: $text-dark;
 }
 
@@ -30,39 +32,35 @@
   pointer-events: none;
   z-index: 0;
 
-  /* ✅ reduced highlight */
+  /* ✅ blue ambient highlights */
   background: radial-gradient(
       700px 420px at 22% 18%,
-      rgba(191, 167, 106, 0.16),
+      rgba(37, 99, 235, 0.14),
       transparent 62%
     ),
     radial-gradient(
       620px 380px at 80% 22%,
-      rgba(191, 167, 106, 0.11),
+      rgba(37, 99, 235, 0.1),
       transparent 62%
     ),
     radial-gradient(
       820px 520px at 50% 86%,
-      rgba(0, 0, 0, 0.05),
+      rgba(15, 23, 42, 0.06),
       transparent 60%
     );
 }
 
-/* subtle animated gold glow (smaller & softer) */
+/* subtle animated glow (kept animation, changed color only) */
 .hero-bg::before {
   content: "";
   position: absolute;
   inset: -25%;
   background: radial-gradient(
       circle at 35% 20%,
-      rgba(191, 167, 106, 0.16),
+      rgba(37, 99, 235, 0.14),
       transparent 60%
     ),
-    radial-gradient(
-      circle at 70% 32%,
-      rgba(191, 167, 106, 0.1),
-      transparent 60%
-    );
+    radial-gradient(circle at 70% 32%, rgba(37, 99, 235, 0.09), transparent 60%);
   animation: heroAmbient 16s ease-in-out infinite;
   opacity: 0.85;
 }
@@ -87,7 +85,7 @@
   background: radial-gradient(
     1200px 800px at 50% 25%,
     transparent 52%,
-    rgba(0, 0, 0, 0.06) 100%
+    rgba(15, 23, 42, 0.08) 100%
   );
   opacity: 0.65;
 }
@@ -108,7 +106,6 @@
   gap: 0.95rem;
   justify-items: center;
 
-  /* subtle float (premium but not too much) */
   animation: heroFloat 8s ease-in-out infinite;
 }
 
@@ -132,7 +129,7 @@
   line-height: 1.02;
   letter-spacing: 0.2px;
   font-size: clamp(2.05rem, 4.9vw, 4.1rem);
-  color: $text-dark;
+  color: #0f172a;
 
   display: grid;
   gap: 0.48rem;
@@ -142,14 +139,14 @@
   font-size: 0.42em;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(28, 28, 28, 0.62);
+  color: rgba(71, 85, 105, 0.9);
 }
 
 .role {
   font-size: 0.38em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(191, 167, 106, 0.95);
+  color: rgba(37, 99, 235, 0.95);
 }
 
 /* =========================
@@ -162,7 +159,7 @@
   position: relative;
 }
 
-/* refined underline glow (smaller) */
+/* refined underline glow (kept anim, changed color only) */
 .name::after {
   content: "";
   position: absolute;
@@ -174,7 +171,7 @@
   border-radius: 999px;
   background: radial-gradient(
     circle at 30% 50%,
-    rgba(191, 167, 106, 0.45),
+    rgba(37, 99, 235, 0.4),
     transparent 72%
   );
   filter: blur(2px);
@@ -226,24 +223,22 @@
   max-width: 60ch;
   line-height: 1.85;
   font-size: clamp(1rem, 1.15vw, 1.08rem);
-  color: rgba(28, 28, 28, 0.74);
+  color: rgba(71, 85, 105, 0.92);
 
-  /* elegant glass strip instead of a square */
   padding: 0.9rem 1.05rem;
   border-radius: 999px;
 
   background: radial-gradient(
       circle at 30% 20%,
-      rgba(191, 167, 106, 0.18),
+      rgba(37, 99, 235, 0.12),
       transparent 55%
     ),
-    rgba(255, 255, 255, 0.66);
+    rgba(255, 255, 255, 0.78);
 
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(12px);
 
-  /* no hard border */
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 
   transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -251,7 +246,7 @@
 
 .hero-sub:hover {
   transform: translateY(-3px);
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 26px 60px rgba(15, 23, 42, 0.1);
 }
 
 /* =========================
@@ -266,7 +261,7 @@
   justify-content: center;
 }
 
-/* Primary button: matches your site */
+/* Primary button: Modern Tech */
 .hero-actions .btn-primary {
   position: relative;
   display: inline-flex;
@@ -281,12 +276,12 @@
   font-weight: 900;
   letter-spacing: 0.04em;
 
-  color: #1c1c1c;
-  background: linear-gradient(135deg, #e7d7a1, #bfa76a);
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   border: 0;
 
-  box-shadow: 0 14px 34px rgba(191, 167, 106, 0.42),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+  box-shadow: 0 14px 34px rgba(37, 99, 235, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 
   transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -300,7 +295,7 @@
   border-radius: inherit;
   background: radial-gradient(
     circle at top,
-    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.45),
     transparent 70%
   );
   opacity: 0;
@@ -309,7 +304,7 @@
 
 .hero-actions .btn-primary:hover {
   transform: translateY(-4px);
-  box-shadow: 0 24px 55px rgba(191, 167, 106, 0.55);
+  box-shadow: 0 24px 55px rgba(37, 99, 235, 0.45);
   filter: saturate(1.02);
 }
 
@@ -335,11 +330,11 @@
   font-weight: 900;
   letter-spacing: 0.04em;
 
-  color: #1c1c1c;
+  color: #2563eb;
 
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(191, 167, 106, 0.4);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
 
   transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
     background 280ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -355,7 +350,7 @@
   bottom: 10px;
   height: 2px;
   border-radius: 999px;
-  background: rgba(191, 167, 106, 0.85);
+  background: rgba(37, 99, 235, 0.9);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -364,8 +359,8 @@
 
 .hero-actions .btn-ghost:hover {
   transform: translateY(-4px);
-  background: rgba(191, 167, 106, 0.14);
-  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.1);
+  background: rgba(37, 99, 235, 0.14);
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.1);
 }
 
 .hero-actions .btn-ghost:hover::after {
