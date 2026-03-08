@@ -1,7 +1,8 @@
 <section id="projects" class="projects section">
   <div class="projects__inner">
     <header class="projects__head" [appRevealOnScroll]="'reveal reveal--up'">
-      <h2 class="section-title">My Projects</h2>
+      <span class="projects__label">PORTFOLIO</span>
+      <h2 class="section-title">My <span class="gradient-text">Projects</span></h2>
       <p class="subtitle">
         Selected work focused on clean architecture, real-world delivery, and
         polished UI/UX.
@@ -11,31 +12,35 @@
     <div class="projects__grid">
       <article
         class="projects__card"
+        [class.projects__card--featured]="i === 0"
         *ngFor="let p of projects; let i = index; trackBy: trackByTitle"
         [style.--d]="(i * 90) + 'ms'"
         [appRevealOnScroll]="'reveal reveal--up'"
       >
-        <div class="projects__top">
-          <div class="projects__badge" aria-hidden="true">{{ p.icon }}</div>
+        <div class="projects__gradient-bar" aria-hidden="true"></div>
+        <div class="projects__card-inner">
+          <div class="projects__top">
+            <div class="projects__badge" aria-hidden="true">{{ p.icon }}</div>
+            <div class="projects__number" aria-hidden="true">0{{ i + 1 }}</div>
+          </div>
+
           <h3>{{ p.title }}</h3>
+          <p class="projects__desc">{{ p.description }}</p>
+
+          <div class="projects__tech-pills">
+            <span class="pill" *ngFor="let t of p.tech.split(', ')">{{ t }}</span>
+          </div>
+
+          <a
+            class="projects__link"
+            [href]="p.href"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{{ p.label }}</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
         </div>
-
-        <p class="projects__desc">{{ p.description }}</p>
-
-        <p class="projects__tech">
-          <span class="label">Tech</span>
-          <span>{{ p.tech }}</span>
-        </p>
-
-        <a
-          class="projects__link"
-          [href]="p.href"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>{{ p.label }}</span>
-          <span aria-hidden="true">→</span>
-        </a>
       </article>
     </div>
   </div>

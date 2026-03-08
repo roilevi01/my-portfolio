@@ -1,40 +1,51 @@
 <section id="contact" class="contact section">
   <div class="contact__inner">
     <header class="contact__head" [appRevealOnScroll]="'reveal'">
-      <h2 class="section-title">Contact Me</h2>
+      <span class="contact__label">GET IN TOUCH</span>
+      <h2 class="section-title">Contact <span class="gradient-text">Me</span></h2>
       <p class="subtitle">
         Have a question or want to work together? Leave a message.
       </p>
     </header>
 
     <div class="contact__content">
-      <!-- Left: Info -->
-      <aside class="info" [appRevealOnScroll]="'reveal reveal--left'">
-        <div class="contact__panel">
-          <h3>Let’s build something great</h3>
-          <p>
-            I’m available for freelance projects and full-time roles. I usually
-            reply within 24–48 hours.
-          </p>
+      <!-- Left: Info (Dark Panel) -->
+      <aside class="contact__info" [appRevealOnScroll]="'reveal reveal--left'">
+        <h3>Let's build something great</h3>
+        <p>
+          I'm available for freelance projects and full-time roles. I usually
+          reply within 24–48 hours.
+        </p>
 
-          <ul class="contact__meta">
-            <li>
-              <span class="k">Email</span><span class="v">Use the form →</span>
-            </li>
-            <li>
-              <span class="k">Location</span><span class="v">Israel</span>
-            </li>
-            <li>
-              <span class="k">Focus</span>
-              <span class="v">Full-Stack · UX · Clean Code</span>
-            </li>
-          </ul>
+        <ul class="contact__meta">
+          <li>
+            <span class="k">📧 Email</span><span class="v">Use the form →</span>
+          </li>
+          <li>
+            <span class="k">📍 Location</span><span class="v">Israel</span>
+          </li>
+          <li>
+            <span class="k">💻 Focus</span>
+            <span class="v">Full-Stack · UX · Clean Code</span>
+          </li>
+        </ul>
+
+        <div class="contact__socials">
+          <a href="https://github.com/RoiLevi01" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/roi-levi01/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:roilevi2212@gmail.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
         </div>
       </aside>
 
       <!-- Right: Form -->
       <form
-        class="contact__panel"
+        class="contact__form"
         (submit)="onSubmit($event)"
         [appRevealOnScroll]="'reveal reveal--up'"
       >

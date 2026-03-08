@@ -3,12 +3,14 @@
     <div class="about-media" [appRevealOnScroll]="'reveal reveal--scale'">
       <div class="avatar">
         <span class="avatar-glow" aria-hidden="true"></span>
+        <span class="avatar-ring" aria-hidden="true"></span>
         <img src="assets/picture_of_me.jpeg" alt="Roi Levi" />
       </div>
     </div>
 
     <div class="about-text" [appRevealOnScroll]="'reveal reveal--right'">
-      <h2 class="section-title">About Me</h2>
+      <span class="about__label">WHO I AM</span>
+      <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
 
       <p>
         I'm <strong>Roi Levi</strong>, a
@@ -18,19 +20,31 @@
 
       <p>
         I work with
-        <strong
-          >React, Angular, Node.js, C#, .NET Core, MongoDB, and SQL
-          Server</strong
-        >, focusing on <strong>clean architecture</strong>,
+        <strong>React, Angular, Node.js, C#, .NET Core, MongoDB, and SQL Server</strong>,
+        focusing on <strong>clean architecture</strong>,
         <strong>responsive UI</strong>, and
         <strong>robust backend logic</strong>.
       </p>
 
       <p>
         I care about <strong>UX/UI</strong>, <strong>RESTful APIs</strong>, and
-        <strong>maintainable code</strong> — with a practical, results-driven
-        mindset.
+        <strong>maintainable code</strong> — with a practical, results-driven mindset.
       </p>
+
+      <div class="about__stats" [appRevealOnScroll]="'reveal reveal--up'">
+        <div class="stat">
+          <span class="stat__number">4+</span>
+          <span class="stat__label">Projects</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number">2+</span>
+          <span class="stat__label">Years Exp</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number">10+</span>
+          <span class="stat__label">Technologies</span>
+        </div>
+      </div>
 
       <div class="actions">
         <a
