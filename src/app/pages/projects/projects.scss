@@ -126,16 +126,26 @@
   }
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-8px) perspective(800px) rotateX(1.5deg) rotateY(-1.5deg);
     border-color: rgba(37, 99, 235, 0.35);
     box-shadow: 0 30px 80px rgba(37, 99, 235, 0.15),
-      0 0 0 1px rgba(37, 99, 235, 0.2);
+      0 0 0 1px rgba(37, 99, 235, 0.2),
+      0 0 25px rgba(37, 99, 235, 0.08);
 
     &::before { opacity: 1; }
 
     .projects__gradient-bar { opacity: 1; }
-    .arrow { transform: translateX(4px); }
+    .arrow { transform: translateX(6px); }
+
+    .projects__badge {
+      animation: badgePulse 1.2s ease-in-out infinite;
+    }
   }
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.1); }
 }
 
 /* Featured (first card) - spans full width */
@@ -159,9 +169,20 @@
 /* Gradient bar */
 .projects__gradient-bar {
   height: 3px;
-  background: linear-gradient(90deg, $accent, #60a5fa, transparent);
+  background: linear-gradient(90deg, transparent, $accent, #60a5fa, transparent);
+  background-size: 200% 100%;
   opacity: 0.5;
   transition: opacity 400ms ease;
+  animation: gradientSweep 3s ease-in-out infinite;
+}
+
+.projects__card:hover .projects__gradient-bar {
+  animation: gradientSweep 1.5s ease-in-out infinite;
+}
+
+@keyframes gradientSweep {
+  0%   { background-position: -100% center; }
+  100% { background-position: 200% center; }
 }
 
 .projects__card-inner {
@@ -189,6 +210,7 @@
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.08));
   border: 1px solid rgba(37, 99, 235, 0.2);
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .projects__number {
@@ -268,6 +290,7 @@
   transition: background 300ms ease, color 300ms ease, border-color 300ms ease;
 
   .arrow {
+    display: inline-block;
     transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 

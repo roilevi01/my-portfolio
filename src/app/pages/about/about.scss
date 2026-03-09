@@ -72,14 +72,22 @@
   position: relative;
   width: min(300px, 72vw);
   aspect-ratio: 1 / 1;
-  border-radius: 999px;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   padding: 6px;
   background: linear-gradient(135deg, $accent, rgba(37, 99, 235, 0.3), $navy-2);
   isolation: isolate;
   overflow: visible;
-  animation: floatAvatar 6.6s ease-in-out infinite;
+  animation: floatAvatar 6.6s ease-in-out infinite, morphBlob 8s ease-in-out infinite;
   transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes morphBlob {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 40% 60% / 40% 50% 60% 50%; }
+  75%  { border-radius: 40% 60% 50% 40% / 60% 40% 50% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
 }
 
 .avatar-glow {
@@ -89,7 +97,7 @@
   background: radial-gradient(circle, rgba(37, 99, 235, 0.35), transparent 70%);
   filter: blur(25px);
   opacity: 0.7;
-  animation: glowPulse 3.8s ease-in-out infinite;
+  animation: glowPulse 3.8s ease-in-out infinite, morphBlob 8s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -97,9 +105,9 @@
 .avatar-ring {
   position: absolute;
   inset: -8px;
-  border-radius: 999px;
+  border-radius: inherit;
   border: 2px solid rgba(37, 99, 235, 0.25);
-  animation: ringPulse 4s ease-in-out infinite;
+  animation: ringPulse 4s ease-in-out infinite, morphBlob 8s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -113,7 +121,7 @@
   z-index: 1;
   width: 100%;
   height: 100%;
-  border-radius: 999px;
+  border-radius: inherit;
   object-fit: cover;
   object-position: center 12%;
   display: block;
@@ -209,13 +217,25 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(37, 99, 235, 0.2);
   text-align: center;
-  transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+  transition: border-color 300ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease;
 
   &:hover {
     border-color: rgba(37, 99, 235, 0.5);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.2),
+      0 0 0 2px rgba(37, 99, 235, 0.1);
   }
+
+  &:hover .stat__number {
+    animation: statBounce 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes statBounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15); }
+  70%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
 }
 
 .stat__number {
@@ -283,23 +303,42 @@
   border: 0;
   box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35),
     inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  overflow: hidden;
 
   &::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35), transparent 55%);
-    opacity: 0;
-    transition: opacity 260ms ease;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.25) 45%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(255, 255, 255, 0.25) 55%,
+      transparent 65%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: 200% center; }
+    100% { background-position: -200% center; }
   }
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 18px 44px rgba(37, 99, 235, 0.5);
+    box-shadow: 0 18px 44px rgba(37, 99, 235, 0.5),
+      0 0 20px rgba(37, 99, 235, 0.3);
+    animation: pulseGlow 1.5s ease-in-out infinite;
   }
 
-  &:hover::after { opacity: 1; }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 18px 44px rgba(37, 99, 235, 0.5), 0 0 20px rgba(37, 99, 235, 0.3); }
+    50%      { box-shadow: 0 18px 44px rgba(37, 99, 235, 0.6), 0 0 35px rgba(37, 99, 235, 0.45); }
+  }
+
   &:active { transform: translateY(-2px); }
 }
 
@@ -307,12 +346,36 @@
   color: rgba(226, 232, 240, 0.9);
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(37, 99, 235, 0.35);
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgba(37, 99, 235, 0.15) 45%,
+      rgba(37, 99, 235, 0.2) 50%,
+      rgba(37, 99, 235, 0.15) 55%,
+      transparent 65%
+    );
+    background-size: 200% 100%;
+    animation: shimmerGhost 4s ease-in-out infinite;
+  }
+
+  @keyframes shimmerGhost {
+    0%   { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
 
   &:hover {
     transform: translateY(-3px);
     border-color: rgba(37, 99, 235, 0.6);
     background: rgba(37, 99, 235, 0.12);
-    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15),
+      0 0 15px rgba(37, 99, 235, 0.2);
   }
 
   &:active { transform: translateY(-1px); }

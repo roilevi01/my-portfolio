@@ -62,6 +62,23 @@
   gap: 0.75rem;
   cursor: pointer;
   user-select: none;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 20px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.15), transparent 70%);
+    opacity: 0;
+    animation: brandGlow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes brandGlow {
+    0%, 100% { opacity: 0; }
+    50%      { opacity: 0.6; }
+  }
 }
 
 .brand__logo {
@@ -149,14 +166,15 @@
 
   background: linear-gradient(
     90deg,
-    transparent,
     rgba(37, 99, 235, 0.95),
-    transparent
+    #60a5fa,
+    rgba(37, 99, 235, 0.95)
   );
 
   transform: scaleX(0);
+  transform-origin: left;
   opacity: 0;
-  transition: transform 240ms var(--ease-out), opacity 240ms var(--ease-out);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms var(--ease-out);
 }
 
 .nav-links a::before {
@@ -252,8 +270,9 @@
     height: 2px;
     border-radius: 999px;
     background: rgba(15, 23, 42, 0.86);
-    transition: transform 220ms var(--ease-out), top 220ms var(--ease-out),
-      opacity 220ms var(--ease-out);
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      top 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   &::before {
@@ -262,6 +281,21 @@
 
   &::after {
     top: 6px;
+  }
+}
+
+/* Hamburger → X morph when menu is open */
+.hamburger[aria-expanded="true"] .hamburger-icon {
+  background: transparent;
+
+  &::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    top: 0;
+    transform: rotate(-45deg);
   }
 }
 
