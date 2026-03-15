@@ -3,51 +3,83 @@ $main-font: "Poppins", sans-serif;
 $heading-font: "Rajdhani", sans-serif;
 
 /* =========================
-   Palette A — Modern Tech / Clean Premium
+   Palette — Glassmorphism Premium Blue
+   Deep navy base · Electric blue accent · Glass surfaces
 ========================= */
 
-/* Base backgrounds */
-$bg-0: #f8fafc; /* main */
-$bg-1: #eef2f6; /* alt section */
+/* ── Base backgrounds ── */
+$bg-0: #060d1f;          /* main — deep navy void */
+$bg-1: #0a1428;          /* alt section — slightly lifted */
+$bg-2: #0d1a33;          /* tertiary — for cards/panels */
 
-/* Surfaces / glass */
-$surface: rgba(255, 255, 255, 0.75);
-$surface-strong: rgba(255, 255, 255, 0.86);
-$glass: rgba(255, 255, 255, 0.75);
+/* ── Mesh / gradient layers (use as background overlays) ── */
+$mesh-1: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(37, 99, 235, 0.18) 0%, transparent 60%);
+$mesh-2: radial-gradient(ellipse 60% 50% at 80% 80%, rgba(99, 179, 237, 0.10) 0%, transparent 55%);
+$mesh-3: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(37, 99, 235, 0.07) 0%, transparent 70%);
 
-/* Text */
-$text-dark: #0f172a;
-$text: rgba(15, 23, 42, 0.92);
-$muted-dark: #475569;
-$muted: rgba(71, 85, 105, 0.95);
+/* ── Surfaces / Glass ── */
+$surface:           rgba(255, 255, 255, 0.04);   /* default card */
+$surface-raised:    rgba(255, 255, 255, 0.07);   /* hover / elevated */
+$surface-strong:    rgba(255, 255, 255, 0.10);   /* prominent card */
+$glass:             rgba(14, 28, 60, 0.55);      /* glass panel */
+$glass-light:       rgba(255, 255, 255, 0.06);   /* light tint glass */
+$glass-border:      rgba(255, 255, 255, 0.10);   /* glass edge highlight */
 
-/* Accent (Primary) */
-$accent: #2563eb; /* blue */
-$accent-hover: #1d4ed8;
-$accent-soft: rgba(37, 99, 235, 0.15);
-$accent-soft-2: rgba(37, 99, 235, 0.12);
-$accent-line: rgba(37, 99, 235, 0.35);
+/* ── Text ── */
+$text-dark:   #ffffff;
+$text:        rgba(255, 255, 255, 0.92);
+$text-sub:    rgba(255, 255, 255, 0.70);
+$muted-dark:  rgba(255, 255, 255, 0.50);
+$muted:       rgba(255, 255, 255, 0.40);
 
-/* Navy / dark */
-$navy: #0f172a;
-$navy-2: #111827;
+/* ── Accent (Primary) — Electric Blue ── */
+$accent:          #3b82f6;               /* vivid electric blue */
+$accent-bright:   #60a5fa;               /* lighter variant */
+$accent-hover:    #2563eb;               /* deeper on hover */
+$accent-glow:     rgba(59, 130, 246, 0.45);  /* glow / bloom */
+$accent-soft:     rgba(59, 130, 246, 0.15);
+$accent-soft-2:   rgba(59, 130, 246, 0.10);
+$accent-line:     rgba(59, 130, 246, 0.40);
 
-/* Borders / dividers */
-$border: rgba(15, 23, 42, 0.12);
-$border-soft: rgba(15, 23, 42, 0.08);
-$divider: rgba(15, 23, 42, 0.06);
+/* ── Secondary accent — Cyan edge ── */
+$cyan:            #67e8f9;
+$cyan-soft:       rgba(103, 232, 249, 0.12);
+$cyan-line:       rgba(103, 232, 249, 0.30);
 
-/* Focus */
-$focus-ring: rgba(37, 99, 235, 0.9);
-$focus-shadow: rgba(37, 99, 235, 0.22);
+/* ── Navy / dark (kept for compatibility) ── */
+$navy:   #060d1f;
+$navy-2: #0a1428;
 
-/* Radius */
-$radius-lg: 22px;
-$radius-md: 16px;
+/* ── Borders / dividers ── */
+$border:        rgba(255, 255, 255, 0.10);
+$border-soft:   rgba(255, 255, 255, 0.06);
+$border-accent: rgba(59, 130, 246, 0.35);
+$divider:       rgba(255, 255, 255, 0.05);
 
-/* Shadows */
-$shadow-soft: 0 18px 60px rgba(15, 23, 42, 0.12);
-$shadow-strong: 0 28px 110px rgba(15, 23, 42, 0.18);
+/* ── Focus ── */
+$focus-ring:   rgba(59, 130, 246, 0.90);
+$focus-shadow: rgba(59, 130, 246, 0.30);
 
-/* Backdrop for overlays */
-$backdrop: rgba(15, 23, 42, 0.55);
+/* ── Radius ── */
+$radius-xl:  28px;
+$radius-lg:  22px;
+$radius-md:  16px;
+$radius-sm:  10px;
+
+/* ── Shadows ── */
+$shadow-soft:   0 8px 32px rgba(0, 0, 0, 0.35);
+$shadow-strong: 0 20px 80px rgba(0, 0, 0, 0.55);
+$shadow-glow:   0 0 40px rgba(59, 130, 246, 0.20);
+$shadow-glow-strong: 0 0 80px rgba(59, 130, 246, 0.35);
+$shadow-inset:  inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+/* ── Backdrop / blur ── */
+$backdrop:      rgba(6, 13, 31, 0.75);
+$blur-glass:    blur(16px) saturate(180%);
+$blur-heavy:    blur(32px) saturate(200%);
+
+/* ── Gradients ── */
+$gradient-accent:  linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+$gradient-dark:    linear-gradient(180deg, #060d1f 0%, #0a1428 100%);
+$gradient-glass:   linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+$gradient-border:  linear-gradient(135deg, rgba(59,130,246,0.5) 0%, rgba(103,232,249,0.3) 100%);

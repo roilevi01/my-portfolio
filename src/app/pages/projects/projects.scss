@@ -1,12 +1,12 @@
 @use "../../../styles/variables" as *;
 
 /* =========================
-   Projects – Dark Tech Bento Grid
+   Projects – Dark Bento Grid
 ========================= */
 
 .projects {
   position: relative;
-  background: $navy-2;
+  background: #0a1428;
   color: #e2e8f0;
   overflow: hidden;
 }
@@ -15,29 +15,21 @@
   content: "";
   position: absolute;
   inset: -40%;
-  background: radial-gradient(
-    circle at 80% 20%,
-    rgba(37, 99, 235, 0.14),
-    transparent 55%
-  );
+  background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.12), transparent 55%);
   animation: projectsAmbient 18s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes projectsAmbient {
-  0% { transform: translate(-6%, -6%); }
-  50% { transform: translate(6%, 6%); }
+  0%   { transform: translate(-6%, -6%); }
+  50%  { transform: translate(6%, 6%); }
   100% { transform: translate(-6%, -6%); }
 }
-
-/* =========================
-   Inner
-========================= */
 
 .projects__inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: clamp(3.6rem, 6vw, 6.2rem) 1rem;
+  padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 4vw, 2rem);
   position: relative;
   z-index: 2;
 }
@@ -50,37 +42,39 @@
   display: inline-block;
   font-family: $heading-font;
   font-weight: 800;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  color: $accent;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  color: #60a5fa;
   margin-bottom: 0.5rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.32rem 0.9rem;
   border-radius: 999px;
-  background: rgba(37, 99, 235, 0.12);
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.28);
 }
 
 .projects__head {
   text-align: center;
-  margin-bottom: clamp(2.4rem, 5vw, 3.6rem);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
 
   .section-title {
     color: #f1f5f9;
     font-family: $heading-font;
     font-weight: 900;
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.1;
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, $accent, #60a5fa);
+    background: linear-gradient(135deg, #3b82f6, #67e8f9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .subtitle {
-    color: rgba(148, 163, 184, 0.85);
-    margin-top: 0.5rem;
+    color: rgba(148, 163, 184, 0.80);
+    margin-top: 0.6rem;
+    font-size: clamp(0.88rem, 1.2vw, 1rem);
   }
 }
 
@@ -91,7 +85,7 @@
 .projects__grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: clamp(1.2rem, 2.5vw, 1.6rem);
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 
 /* =========================
@@ -104,51 +98,39 @@
   border-radius: $radius-lg;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(10px);
-  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 420ms var(--ease-out), box-shadow 420ms var(--ease-out),
+    border-color 420ms var(--ease-out);
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: radial-gradient(
-      circle at 50% 0%,
-      rgba(37, 99, 235, 0.12),
-      transparent 60%
-    );
+    background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.12), transparent 60%);
     opacity: 0;
     transition: opacity 420ms ease;
     pointer-events: none;
   }
 
   &:hover {
-    transform: translateY(-8px) perspective(800px) rotateX(1.5deg) rotateY(-1.5deg);
-    border-color: rgba(37, 99, 235, 0.35);
-    box-shadow: 0 30px 80px rgba(37, 99, 235, 0.15),
-      0 0 0 1px rgba(37, 99, 235, 0.2),
-      0 0 25px rgba(37, 99, 235, 0.08);
+    transform: translateY(-8px);
+    border-color: rgba(59, 130, 246, 0.35);
+    box-shadow: 0 28px 70px rgba(59, 130, 246, 0.14), 0 0 0 1px rgba(59, 130, 246, 0.18);
 
     &::before { opacity: 1; }
-
     .projects__gradient-bar { opacity: 1; }
     .arrow { transform: translateX(6px); }
-
-    .projects__badge {
-      animation: badgePulse 1.2s ease-in-out infinite;
-    }
+    .projects__badge { animation: badgePulse 1.2s ease-in-out infinite; }
   }
 }
 
 @keyframes badgePulse {
   0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.1); }
+  50%       { transform: scale(1.1); }
 }
 
-/* Featured (first card) - spans full width */
 .projects__card--featured {
   grid-column: span 12;
 
@@ -159,25 +141,18 @@
     column-gap: 2rem;
   }
 
-  .projects__top {
-    grid-column: 1 / -1;
-  }
-
-  h3 { font-size: 1.6rem; }
+  .projects__top { grid-column: 1 / -1; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); }
 }
 
 /* Gradient bar */
 .projects__gradient-bar {
   height: 3px;
-  background: linear-gradient(90deg, transparent, $accent, #60a5fa, transparent);
+  background: linear-gradient(90deg, transparent, #3b82f6, #67e8f9, transparent);
   background-size: 200% 100%;
-  opacity: 0.5;
+  opacity: 0.45;
   transition: opacity 400ms ease;
   animation: gradientSweep 3s ease-in-out infinite;
-}
-
-.projects__card:hover .projects__gradient-bar {
-  animation: gradientSweep 1.5s ease-in-out infinite;
 }
 
 @keyframes gradientSweep {
@@ -185,13 +160,7 @@
   100% { background-position: 200% center; }
 }
 
-.projects__card-inner {
-  padding: 1.5rem 1.7rem;
-}
-
-/* =========================
-   Card Top
-========================= */
+.projects__card-inner { padding: clamp(1.1rem, 2vw, 1.7rem); }
 
 .projects__top {
   display: flex;
@@ -201,23 +170,23 @@
 }
 
 .projects__badge {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 14px;
   display: grid;
   place-items: center;
-  font-size: 1.4rem;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.08));
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
-  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 1.35rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.08));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+  transition: transform 400ms var(--ease-out);
 }
 
 .projects__number {
   font-family: $heading-font;
   font-weight: 900;
   font-size: 2rem;
-  color: rgba(37, 99, 235, 0.15);
+  color: rgba(59, 130, 246, 0.14);
   line-height: 1;
 }
 
@@ -225,78 +194,68 @@
   margin: 0 0 0.6rem;
   font-family: $heading-font;
   font-weight: 900;
-  font-size: 1.35rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
   color: #f1f5f9;
 }
 
-/* =========================
-   Text
-========================= */
-
 .projects__desc {
-  margin: 0 0 1.2rem;
-  color: rgba(148, 163, 184, 0.9);
+  margin: 0 0 1.1rem;
+  color: rgba(148, 163, 184, 0.88);
   line-height: 1.75;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
 }
 
-/* =========================
-   Tech Pills
-========================= */
-
+/* Tech Pills */
 .projects__tech-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 1.4rem;
+  gap: 6px;
+  margin-bottom: 1.2rem;
 }
 
 .pill {
-  padding: 0.3rem 0.75rem;
+  padding: 0.28rem 0.7rem;
   border-radius: 999px;
   font-family: $heading-font;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.03em;
   color: #93c5fd;
-  background: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  background: rgba(59, 130, 246, 0.10);
+  border: 1px solid rgba(59, 130, 246, 0.20);
   transition: background 300ms ease, border-color 300ms ease;
 }
 
 .projects__card:hover .pill {
-  background: rgba(37, 99, 235, 0.18);
-  border-color: rgba(37, 99, 235, 0.35);
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.35);
 }
 
-/* =========================
-   Link
-========================= */
-
+/* Link */
 .projects__link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 0.55rem 1rem;
-  border-radius: 12px;
+  gap: 8px;
+  padding: 0.5rem 0.95rem;
+  border-radius: 10px;
   font-family: $heading-font;
   font-weight: 900;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   letter-spacing: 0.04em;
   color: #93c5fd;
-  background: rgba(37, 99, 235, 0.08);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.20);
   text-decoration: none;
   transition: background 300ms ease, color 300ms ease, border-color 300ms ease;
 
   .arrow {
     display: inline-block;
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 300ms var(--ease-out);
   }
 
   &:hover {
-    background: rgba(37, 99, 235, 0.18);
-    border-color: rgba(37, 99, 235, 0.4);
+    background: rgba(59, 130, 246, 0.18);
+    border-color: rgba(59, 130, 246, 0.40);
     color: #bfdbfe;
   }
 }
@@ -305,15 +264,16 @@
    Responsive
 ========================= */
 
-@media (max-width: 980px) {
+@media (max-width: 900px) {
   .projects__card,
-  .projects__card--featured {
-    grid-column: span 12;
-  }
+  .projects__card--featured { grid-column: span 12; }
 
-  .projects__card--featured .projects__card-inner {
-    display: block;
-  }
+  .projects__card--featured .projects__card-inner { display: block; }
+}
+
+@media (max-width: 480px) {
+  .projects__grid { grid-template-columns: 1fr; }
+  .projects__card { grid-column: span 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

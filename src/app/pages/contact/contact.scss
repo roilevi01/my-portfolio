@@ -1,12 +1,12 @@
 @use "../../../styles/variables" as *;
 
 /* =========================
-   Contact – Dark Tech Premium
+   Contact – Dark Glassmorphism
 ========================= */
 
 .contact {
   position: relative;
-  background: $navy-2;
+  background: #0a1428;
   color: #e2e8f0;
   overflow: hidden;
 }
@@ -15,29 +15,21 @@
   content: "";
   position: absolute;
   inset: -40%;
-  background: radial-gradient(
-    circle at 70% 30%,
-    rgba(37, 99, 235, 0.14),
-    transparent 55%
-  );
+  background: radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.12), transparent 55%);
   animation: contactAmbient 18s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes contactAmbient {
-  0% { transform: translate(-6%, -6%); }
-  50% { transform: translate(6%, 6%); }
+  0%   { transform: translate(-6%, -6%); }
+  50%  { transform: translate(6%, 6%); }
   100% { transform: translate(-6%, -6%); }
 }
 
-/* =========================
-   Inner
-========================= */
-
 .contact__inner {
-  max-width: 1250px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(3.6rem, 6vw, 6.2rem) 1rem;
+  padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 4vw, 2rem);
   position: relative;
   z-index: 2;
 }
@@ -50,14 +42,14 @@
   display: inline-block;
   font-family: $heading-font;
   font-weight: 800;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  color: $accent;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  color: #60a5fa;
   margin-bottom: 0.5rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.32rem 0.9rem;
   border-radius: 999px;
-  background: rgba(37, 99, 235, 0.12);
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.28);
 }
 
 .contact__head {
@@ -68,19 +60,21 @@
     color: #f1f5f9;
     font-family: $heading-font;
     font-weight: 900;
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.1;
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, $accent, #60a5fa);
+    background: linear-gradient(135deg, #3b82f6, #67e8f9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .subtitle {
-    color: rgba(148, 163, 184, 0.85);
-    margin-top: 0.5rem;
+    color: rgba(148, 163, 184, 0.80);
+    margin-top: 0.6rem;
+    font-size: clamp(0.88rem, 1.2vw, 1rem);
   }
 }
 
@@ -90,61 +84,62 @@
 
 .contact__content {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  gap: clamp(1.4rem, 3vw, 2rem);
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(1.2rem, 3vw, 2rem);
   align-items: start;
 }
 
 /* =========================
-   Info Panel (Dark)
+   Info Panel
 ========================= */
 
 .contact__info {
   border-radius: $radius-lg;
-  padding: 2rem 1.8rem;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
 
   h3 {
     font-family: $heading-font;
     font-weight: 900;
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     margin-bottom: 0.8rem;
     color: #f1f5f9;
   }
 
   p {
-    color: rgba(148, 163, 184, 0.85);
+    color: rgba(148, 163, 184, 0.82);
     line-height: 1.75;
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
   }
 }
 
 .contact__meta {
   list-style: none;
-  margin-top: 1.6rem;
+  margin-top: 1.5rem;
   display: grid;
-  gap: 1rem;
+  gap: 0.9rem;
 
   li {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 0.8rem;
-    padding-top: 0.9rem;
+    grid-template-columns: 100px 1fr;
+    gap: 0.75rem;
+    padding-top: 0.85rem;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .k {
     font-family: $heading-font;
     font-weight: 800;
-    color: rgba(148, 163, 184, 0.6);
-    font-size: 0.9rem;
+    color: rgba(148, 163, 184, 0.55);
+    font-size: 0.85rem;
   }
 
   .v {
-    color: rgba(226, 232, 240, 0.85);
-    font-size: 0.93rem;
+    color: rgba(226, 232, 240, 0.82);
+    font-size: 0.9rem;
+    word-break: break-all;
   }
 }
 
@@ -154,42 +149,32 @@
 
 .contact__socials {
   display: flex;
-  gap: 14px;
-  margin-top: 1.8rem;
-  padding-top: 1.4rem;
+  gap: 12px;
+  margin-top: 1.6rem;
+  padding-top: 1.3rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
 
   a {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 999px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(37, 99, 235, 0.1);
-    border: 1px solid rgba(37, 99, 235, 0.2);
+    background: rgba(59, 130, 246, 0.10);
+    border: 1px solid rgba(59, 130, 246, 0.20);
     color: #93c5fd;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     text-decoration: none;
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-      background 300ms ease,
-      box-shadow 300ms ease,
-      border-color 300ms ease;
+    transition: transform 300ms var(--ease-out), background 300ms ease,
+      box-shadow 300ms ease, border-color 300ms ease;
 
     &:hover {
       transform: translateY(-5px) scale(1.1);
-      background: rgba(37, 99, 235, 0.2);
-      border-color: rgba(37, 99, 235, 0.45);
-      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2),
-        0 0 0 3px rgba(37, 99, 235, 0.1);
-      animation: socialBounce 600ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes socialBounce {
-      0%   { transform: translateY(0) scale(1); }
-      30%  { transform: translateY(-8px) scale(1.12); }
-      60%  { transform: translateY(-3px) scale(1.08); }
-      100% { transform: translateY(-5px) scale(1.1); }
+      background: rgba(59, 130, 246, 0.20);
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.20);
     }
   }
 }
@@ -200,32 +185,30 @@
 
 .contact__form {
   border-radius: $radius-lg;
-  padding: 2rem 1.8rem;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
 }
 
 .contact__formGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.9rem;
 }
 
-.contact__full {
-  grid-column: 1 / -1;
-}
+.contact__full { grid-column: 1 / -1; }
 
 .contact__field {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.4rem;
   min-width: 0;
 
   span {
     font-family: $heading-font;
     font-weight: 800;
-    font-size: 0.85rem;
-    color: rgba(148, 163, 184, 0.7);
+    font-size: 0.82rem;
+    color: rgba(148, 163, 184, 0.65);
   }
 
   input,
@@ -233,35 +216,27 @@
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    padding: 0.95rem 1rem;
-    border-radius: 14px;
+    padding: 0.88rem 1rem;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: #e2e8f0;
     font-family: $main-font;
-    font-size: 0.95rem;
-    transition: border-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    transition: border-color 400ms var(--ease-out), box-shadow 400ms var(--ease-out),
       background 400ms ease;
-    position: relative;
 
-    &::placeholder {
-      color: rgba(148, 163, 184, 0.4);
-    }
+    &::placeholder { color: rgba(148, 163, 184, 0.35); }
 
     &:focus {
       outline: none;
-      border-color: rgba(37, 99, 235, 0.7);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15),
-        0 4px 20px rgba(37, 99, 235, 0.12),
-        inset 0 -2px 0 0 rgba(37, 99, 235, 0.5);
+      border-color: rgba(59, 130, 246, 0.65);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12), 0 4px 20px rgba(59, 130, 246, 0.10);
       background: rgba(255, 255, 255, 0.06);
     }
   }
 
-  textarea {
-    resize: vertical;
-  }
+  textarea { resize: vertical; min-height: 120px; }
 }
 
 /* =========================
@@ -269,7 +244,7 @@
 ========================= */
 
 .contact__btn {
-  margin-top: 1.3rem;
+  margin-top: 1.2rem;
   width: 100%;
   border: 0;
   border-radius: $radius-md;
@@ -280,30 +255,22 @@
   gap: 0.7rem;
   font-family: $heading-font;
   font-weight: 900;
-  letter-spacing: 0.04em;
+  font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+  letter-spacing: 0.05em;
   color: #fff;
-  background: linear-gradient(135deg, $accent, $accent-hover);
-  box-shadow: 0 18px 44px rgba(37, 99, 235, 0.25),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 14px 38px rgba(59, 130, 246, 0.28), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(
-      105deg,
-      transparent 35%,
-      rgba(255, 255, 255, 0.25) 45%,
-      rgba(255, 255, 255, 0.35) 50%,
-      rgba(255, 255, 255, 0.25) 55%,
-      transparent 65%
-    );
+    background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.25) 50%, transparent 65%);
     background-size: 200% 100%;
     animation: contactShimmer 3s ease-in-out infinite;
   }
@@ -315,26 +282,7 @@
 
   &:hover:not(:disabled) {
     transform: translateY(-4px);
-    box-shadow: 0 26px 60px rgba(37, 99, 235, 0.35),
-      0 0 25px rgba(37, 99, 235, 0.2);
-  }
-
-  &:active:not(:disabled)::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%) scale(0);
-    animation: ripple 600ms ease-out forwards;
-  }
-
-  @keyframes ripple {
-    0%   { transform: translate(-50%, -50%) scale(0); opacity: 0.5; }
-    100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+    box-shadow: 0 22px 55px rgba(59, 130, 246, 0.38), 0 0 25px rgba(59, 130, 246, 0.18);
   }
 
   &:disabled {
@@ -348,14 +296,13 @@
    Responsive
 ========================= */
 
-@media (max-width: 980px) {
-  .contact__content {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 900px) {
+  .contact__content { grid-template-columns: 1fr; }
+}
 
-  .contact__formGrid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 560px) {
+  .contact__formGrid { grid-template-columns: 1fr; }
+  .contact__meta li { grid-template-columns: 1fr; gap: 0.25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
