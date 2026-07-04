@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Header } from '../../shared/header/header';
-import { Hero } from './sections/hero/hero';
-import { About } from '../about/about';
-import { Projects } from '../projects/projects';
-import { Services } from './sections/services/services';
+import { Journey } from '../journey/journey';
 
 import { Footer } from '../footer/footer';
 
@@ -17,10 +14,7 @@ import { AiChatWidgetComponent } from '../../shared/ai-chat-widget/ai-chat-widge
   standalone: true,
   imports: [
     Header,
-    Hero,
-    About,
-    Projects,
-    Services,
+    Journey,
     Contact,
     Footer,
     RevealOnScrollDirective,

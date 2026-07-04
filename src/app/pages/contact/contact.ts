@@ -20,6 +20,15 @@ export class Contact {
   async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
 
+    const form = event.target as HTMLFormElement;
+
+    // הגנת honeypot: אם השדה המוסתר מולא — כנראה בוט. נעצור בשקט.
+    const honeypot = (form.elements.namedItem('company') as HTMLInputElement | null)?.value;
+    if (honeypot) {
+      form.reset();
+      return;
+    }
+
     if (this.isSending()) return;
     this.isSending.set(true);
 
@@ -27,13 +36,13 @@ export class Contact {
       await emailjs.sendForm(
         'service_4flqi53',
         'template_rahm6gh',
-        event.target as HTMLFormElement,
+        form,
         '-5mmTYNqLYdZmaKT4'
       );
 
       this.snackBarType.set('success');
       this.showSnackbar.set(true);
-      (event.target as HTMLFormElement).reset();
+      form.reset();
     } catch (err) {
       console.error('FAILED...', err);
       this.snackBarType.set('error');

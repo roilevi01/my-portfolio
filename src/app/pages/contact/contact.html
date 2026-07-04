@@ -50,6 +50,12 @@
         [appRevealOnScroll]="'reveal reveal--up'"
       >
         <div class="contact__formGrid">
+          <!-- Honeypot: שדה מוסתר לבני-אדם, בוטים לרוב ממלאים אותו -->
+          <label class="hp-field" aria-hidden="true">
+            <span>Company</span>
+            <input type="text" name="company" tabindex="-1" autocomplete="off" />
+          </label>
+
           <label class="contact__field">
             <span>Your Name</span>
             <input type="text" name="name" placeholder="Your name" required />

@@ -1,5 +1,6 @@
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { ScrollService } from '../../services/scroll.service';
+import { JourneyNavService } from '../../services/journey-nav.service';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,7 @@ export class Header implements OnInit {
   isScrolled = false;
 
   private scroll = inject(ScrollService);
+  private journeyNav = inject(JourneyNavService);
 
   ngOnInit(): void {
     this.onWindowScroll();
@@ -46,7 +48,11 @@ export class Header implements OnInit {
 
   scrollTo(sectionId: string, event: Event): void {
     event.preventDefault();
-    this.scroll.scrollToElementSlowly(sectionId);
+    if (this.journeyNav.hasAct(sectionId)) {
+      this.journeyNav.scrollToAct(sectionId);
+    } else {
+      this.scroll.scrollToElementSlowly(sectionId);
+    }
     this.closeMenu();
   }
 }

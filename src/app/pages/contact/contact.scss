@@ -293,6 +293,20 @@
 }
 
 /* =========================
+   Honeypot (anti-spam, hidden from real users)
+========================= */
+
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* =========================
    Responsive
 ========================= */
 

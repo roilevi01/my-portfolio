@@ -1,0 +1,79 @@
+<section class="noc section" id="noc">
+  <div class="noc__inner">
+    <header class="noc__head" [appRevealOnScroll]="'reveal'">
+      <span class="noc__label">BEHIND THE SCREENS</span>
+      <h2 class="section-title">
+        NOC <span class="gradient-text">Technician</span>
+      </h2>
+      <p class="subtitle">
+        Beyond development, I bring systems-level thinking to production
+        reliability — monitoring, incident response, and calm troubleshooting
+        under pressure.
+      </p>
+      <span class="noc__availability">
+        <span class="noc__dot" aria-hidden="true"></span>
+        Available for 24/7 NOC shifts — nights &amp; weekends
+      </span>
+    </header>
+
+    <div class="noc__grid">
+      <!-- Terminal-style console panel -->
+      <div class="noc__terminal" [appRevealOnScroll]="'reveal reveal--left'">
+        <div class="terminal__bar">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+          <span class="terminal__title">noc-lab — ubuntu&#64;roi</span>
+        </div>
+        <div class="terminal__body">
+          <p class="terminal__line" *ngFor="let cmd of commands">
+            <span class="prompt">$</span> {{ cmd }}
+          </p>
+          <p class="terminal__line terminal__line--cursor">
+            <span class="prompt">$</span>
+            <span class="cursor"></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="noc__content" [appRevealOnScroll]="'reveal reveal--right'">
+        <div class="noc__flow">
+          <span
+            class="noc__flow-step"
+            *ngFor="let step of incidentFlow; let last = last"
+          >
+            {{ step }}
+            <span class="noc__flow-arrow" *ngIf="!last">→</span>
+          </span>
+        </div>
+
+        <ul class="noc__highlights">
+          <li *ngFor="let h of highlights">{{ h }}</li>
+        </ul>
+
+        <div class="noc__skills">
+          <div class="noc__skill-group" *ngFor="let g of skillGroups">
+            <span class="noc__skill-label">{{ g.label }}</span>
+            <div class="noc__skill-tags">
+              <span class="noc__skill-tag" *ngFor="let item of g.items">{{
+                item
+              }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="noc__actions">
+          <a
+            class="btn-primary"
+            href="assets/CV_Roi_Levi_NOC.pdf"
+            download="Roi_Levi_NOC_CV.pdf"
+            aria-label="Download Roi Levi's NOC CV"
+          >
+            <span aria-hidden="true">📄</span>
+            <span>Download NOC CV</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

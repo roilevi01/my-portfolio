@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-solitary-rain-2986.fly.dev/sitemap.xml

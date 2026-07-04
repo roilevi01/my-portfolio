@@ -1,0 +1,138 @@
+<section class="journey" id="resume" #wrapper>
+  <div class="journey__stage">
+    <div class="journey__photo-frame">
+      <span class="journey__glow" aria-hidden="true"></span>
+      <img #photoA src="assets/roi_pointing.png" alt="Roi Levi" class="journey__photo" />
+      <img #photoB src="assets/picture_of_me.jpeg" alt="Roi Levi" class="journey__photo" />
+    </div>
+
+    <div class="journey__content">
+      <!-- ACT 0 — Intro -->
+      <div class="journey__panel" #panelIntro>
+        <span class="journey__label">HI, I'M</span>
+        <h1 class="journey__name">Roi Levi</h1>
+        <p class="journey__role">Full Stack Developer</p>
+        <p class="journey__text">
+          Building clean, scalable web apps with modern UI/UX and smooth
+          interactions.
+        </p>
+        <div class="journey__actions">
+          <a class="btn-primary" href="assets/CV_Roi_Levi_FullStack.pdf" download="Roi_Levi_FullStack_CV.pdf" (click)="onCvDownload('FullStack')">
+            <span aria-hidden="true">📄</span><span>Download CV</span>
+          </a>
+          <a class="btn-ghost" href="#" (click)="scrollToContactSlowly($event)">Contact</a>
+        </div>
+      </div>
+
+      <!-- ACT 1 — About -->
+      <div class="journey__panel" #panelAbout>
+        <span class="journey__label">WHO I AM</span>
+        <h2 class="journey__title">About <span class="gradient-text">Me</span></h2>
+        <p class="journey__text">
+          I'm <strong>Roi Levi</strong>, a <strong>Full Stack Developer</strong>
+          building <strong>end-to-end, production-ready web applications</strong>.
+        </p>
+        <p class="journey__text">
+          I work with <strong>React, Angular, Node.js, C#, .NET Core, MongoDB,
+          and SQL Server</strong>, focusing on clean architecture and robust
+          backend logic.
+        </p>
+        <div class="journey__stats">
+          <div class="stat"><span class="stat__number">4+</span><span class="stat__label">Projects</span></div>
+          <div class="stat"><span class="stat__number">2+</span><span class="stat__label">Years Exp</span></div>
+          <div class="stat"><span class="stat__number">10+</span><span class="stat__label">Technologies</span></div>
+        </div>
+      </div>
+
+      <!-- ACT 2 — NOC -->
+      <div class="journey__panel" #panelNoc>
+        <span class="journey__label">BEHIND THE SCREENS</span>
+        <h2 class="journey__title">NOC <span class="gradient-text">Technician</span></h2>
+        <p class="journey__text">
+          Hands-on experience in Linux systems, network monitoring, and
+          incident troubleshooting — calm under pressure, available for 24/7
+          NOC shifts.
+        </p>
+        <div class="journey__tags">
+          <span class="journey__tag" *ngFor="let s of nocSkills">{{ s }}</span>
+        </div>
+        <div class="journey__actions">
+          <a class="btn-primary" href="assets/CV_Roi_Levi_NOC.pdf" download="Roi_Levi_NOC_CV.pdf" (click)="onCvDownload('NOC')">
+            <span aria-hidden="true">📄</span><span>Download NOC CV</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ACT 3 — Projects -->
+      <div class="journey__panel" #panelProjects>
+        <span class="journey__label">WHAT I'VE BUILT</span>
+        <h2 class="journey__title">Selected <span class="gradient-text">Projects</span></h2>
+        <div class="journey__list">
+          <a
+            class="journey__list-item"
+            *ngFor="let p of projects"
+            [href]="p.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            (click)="onProjectClick(p.title)"
+          >
+            <span class="journey__list-icon">{{ p.icon }}</span>
+            <span class="journey__list-text">
+              <strong>{{ p.title }}</strong>
+              <small>{{ p.tech }}</small>
+              <small class="journey__list-label">{{ p.label }} ↗</small>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ACT 4 — Services -->
+      <div class="journey__panel" #panelServices>
+        <span class="journey__label">WHAT I DO</span>
+        <h2 class="journey__title">My <span class="gradient-text">Services</span></h2>
+        <div class="journey__services-grid">
+          <div class="journey__service" *ngFor="let s of services">
+            <span class="journey__service-icon">{{ s.icon }}</span>
+            <strong>{{ s.title }}</strong>
+            <small>{{ s.tags }}</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACT 5 — Contact (teaser) -->
+      <div class="journey__panel" #panelContact>
+        <span class="journey__label">LET'S TALK</span>
+        <h2 class="journey__title">Get In <span class="gradient-text">Touch</span></h2>
+        <p class="journey__text">
+          Available for freelance projects and full-time roles. I usually
+          reply within 24–48 hours.
+        </p>
+        <div class="journey__socials">
+          <a href="https://github.com/RoiLevi01" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/roi-levi01/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:roilevi2212@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="journey__actions">
+          <a class="btn-primary" href="#" (click)="scrollToContactSlowly($event)">
+            <span aria-hidden="true">✉️</span><span>Send a Message</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- נקודות ניווט צדדיות בין המערכות -->
+  <div class="journey__dots" aria-label="Journey sections">
+    <button
+      *ngFor="let label of actLabels; let i = index"
+      type="button"
+      class="journey__dot"
+      [class.is-active]="activeIndex() === i"
+      [attr.aria-label]="label"
+      [attr.aria-current]="activeIndex() === i"
+      (click)="goToAct(i)"
+    >
+      <span class="journey__dot-tooltip">{{ label }}</span>
+    </button>
+  </div>
+</section>

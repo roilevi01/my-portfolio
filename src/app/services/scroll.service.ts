@@ -10,6 +10,11 @@ export class ScrollService {
     const targetY =
       target.getBoundingClientRect().top + window.scrollY - headerH;
 
+    this.scrollToY(targetY);
+  }
+
+  /** גלילה חלקה למיקום Y מוחלט (בפיקסלים) בעמוד */
+  scrollToY(targetY: number): void {
     const startY = window.scrollY;
     const distance = targetY - startY;
 
