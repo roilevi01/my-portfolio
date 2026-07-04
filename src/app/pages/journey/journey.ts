@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollService } from '../../services/scroll.service';
@@ -30,7 +31,7 @@ gsap.registerPlugin(ScrollTrigger);
 @Component({
   selector: 'app-journey',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RevealOnScrollDirective],
   templateUrl: './journey.html',
   styleUrls: ['./journey.scss'],
 })
